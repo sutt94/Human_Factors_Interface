@@ -1,0 +1,15 @@
+body {
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif;
+}
+
+.top-buffer { margin-top:20px; }
+
+.bottom-buffer { margin-bottom:50px; }
+
+.medium-bottom-buffer { margin-bottom:15px; }
+
+.small-bottom-buffer { margin-bottom: 15px;
+                       padding-bottom: 32px;
+                          }
