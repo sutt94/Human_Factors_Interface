@@ -13,3 +13,14 @@ body {
 .small-bottom-buffer { margin-bottom: 15px;
                        padding-bottom: 32px;
                           }
+
+.smaller-bottom-buffer { margin-bottom: 5px;
+;
+}
+
+.slight-smaller-bottom-buffer { margin-bottom: 15px;
+;
+}
+
+.header-spacing { margin-bottom:15px;
+margin-top:15px; }
