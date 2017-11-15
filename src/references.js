@@ -1,11 +1,16 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 
-class references extends Component {
+class References extends Component {
 
 processForm() {
   document.body.scrollTop = document.documentElement.scrollTop = 0;
   var errorDetected = 0;
+  var continueLink = document.getElementById("continue");
+  var infoMessage = document.getElementById("infoMessage");
+  var emailTest = /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
+  var phoneTest = /^\d{10}$/;
+  infoMessage.style.visibility = 'visible';
 
 
 
@@ -66,7 +71,7 @@ render() {
     </div>
 
     <div className="col-md-6 text-center small-top-buffer">
-      <h3>Driver Information</h3><h6>(All Fields Required For Driver Position)</h6>
+      <h3>References</h3><h6>(Please provide four references other than family members.)</h6>
     </div>
 
     <div className="col-md-3">
@@ -78,7 +83,7 @@ render() {
 
     <div className="col-md-3" id="previous">
 
-      <Link to='/' className="btn btn-primary">Previous</Link>
+      <Link to='/WorkHistory' className="btn btn-primary">Previous</Link>
 
     </div>
 
@@ -91,12 +96,99 @@ render() {
 
     <div className="col-md-3 text-right" id="continue" style={{visibility: "hidden"}}>
 
-      <Link to='/JobRelated' className="btn btn-success">Continue</Link>
+      <Link to='/Other' className="btn btn-success">Continue</Link>
 
     </div>
 
 
   </div>
+
+  <div className='card bg-light'>
+    <div class="card-body">
+
+  <div className="row top-buffer medium-bottom-buffer ">
+
+    <div className="col-md-4">
+
+      <div className="form-group">
+
+        <label for="referenceName" id="referenceNameLabel">First Name:</label>
+
+        <input type="text" className="form-control" id="referenceName" ref="referenceName" required></input>
+
+      </div>
+
+    </div>
+
+    <div className="col-md-4">
+
+      <div className="form-group">
+
+        <label for="referenceTitle" id="referenceTitleLabel">Title:</label>
+
+        <input type="text" className="form-control" id="referenceTitle" ref="referenceTitle"></input>
+
+      </div>
+
+    </div>
+
+    <div className="col-md-4">
+
+      <div className="form-group">
+
+        <label for="referenceCompany" id="referenceCompanyLabel">Company:</label>
+
+        <input type="text" className="form-control" id="referenceCompany" ref="referenceCompany"></input>
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <div className="row top-buffer medium-bottom-buffer">
+
+    <div className="col-md-4">
+
+      <div className="form-group">
+
+        <label for="referenceAddress" id="referenceAddressLabel">Address:</label>
+
+        <input type="text" className="form-control" id="referenceAddressName" ref="referenceAddressName" required></input>
+
+      </div>
+
+    </div>
+
+    <div className="col-md-4">
+
+      <div className="form-group">
+
+        <label for="referencePhone" id="referencePhoneLabel">Phone:</label>
+
+        <input type="text" className="form-control" id="referencePhone" ref="referencePhone" placeholder="##########"></input>
+
+      </div>
+
+    </div>
+
+    <div className="col-md-4">
+
+      <div className="form-group">
+
+        <label for="referenceEmail" id="referenceEmailLabel">Email:</label>
+
+        <input type="text" className="form-control" id="referenceEmail" ref="referenceEmail" placeholder="test@test.com"></input>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+
+</div>
 
 
   <div className="row bottom-buffer">
@@ -123,3 +215,5 @@ render() {
 }
 
 }
+
+export default References;

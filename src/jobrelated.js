@@ -852,7 +852,7 @@ render() {
 
         <div className="col-md-3 text-right" id="continue" style={{visibility: "hidden"}}>
 
-          <Link to='/JobRelated' className="btn btn-success">Continue</Link>
+          <Link to='/CriminalHistory' className="btn btn-success">Continue</Link>
 
         </div>
 
@@ -1527,7 +1527,7 @@ else{
 
         <div className="col-md-3 text-right" id="continue" style={{visibility: "hidden"}}>
 
-          <Link to='/JobRelated' className="btn btn-success">Continue</Link>
+          <Link to='/CriminalHistory' className="btn btn-success">Continue</Link>
 
         </div>
 

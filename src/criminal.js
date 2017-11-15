@@ -415,7 +415,7 @@ render() {
 
     <div className="col-md-3 text-right" id="continue" style={{visibility: "hidden"}}>
 
-      <Link to='/Education' className="btn btn-success">Continue</Link>
+      <Link to='/EducationHistory' className="btn btn-success">Continue</Link>
 
     </div>
 
