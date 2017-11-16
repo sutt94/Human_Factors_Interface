@@ -3,7 +3,9 @@ import { Link } from 'react-router-dom';
 
 class Criminal extends Component {
 
+
 processForm() {
+  localStorage.setItem("complete3", '0');
   document.body.scrollTop = document.documentElement.scrollTop = 0;
   var errorDetected = 0;
   var continueLink = document.getElementById("continue");
@@ -255,7 +257,10 @@ else{
 
   if (errorDetected == 0){
 
-    document.getElementById("infoMessage").innerHTML = "Your information has been saved. Press continue below to continue to the next phase of the application " + "<i class='fa fa-check-circle-o' aria-hidden='true'></i>"
+    var complete = '1';
+    localStorage.setItem("complete3", complete);
+
+    document.getElementById("infoMessage").innerHTML = "Your information has been saved. Press continue to move on to the next phase of the application " + "<i class='fa fa-check-circle-o' aria-hidden='true'></i>"
 
       document.getElementById("infoMessage").style.color = "green";
 
@@ -279,6 +284,9 @@ else{
 
 componentDidMount () {
 
+  if(localStorage.getItem("complete3") == '1') {
+  document.getElementById("continue").style.visibility = 'visible';
+    }
   if(localStorage.getItem("commited") !== null) {
     this.refs.commited.value = localStorage.getItem("commited");
     }
@@ -429,7 +437,7 @@ render() {
 
     <div className="col-md-4">
 
-      <div className="form-group">
+      <div className="form-group text-center">
 
         <label for="commited" id="commitedLabel" >Have you been convicted of a criminal offense within the past 10 years?</label>
 
@@ -449,276 +457,282 @@ render() {
 
   <div className="row slight-smaller-bottom-buffer">
 
-<div className="col-md-12 text-center">
-If yes please list the criminal offenses below.
-</div>
+    <div className="col-md-12 text-center">
+      If yes please list all criminal convictions within the past 10 years.
+    </div>
 
 
 
   </div>
 
-  <div className="row">
+  <div className='card bg-light medium-bottom-buffer '>
+    <div class="card-body">
 
-    <div className="col-md-4">
+      <div className="row">
 
-      <div className="form-group">
+        <div className="col-md-4">
 
-        <label for="offenseDate" id="offsenseDateLabel">Offense Date:</label>
+          <div className="form-group">
 
-        <input type="text" className="form-control" id="offenseDate" ref="offenseDate" placeholder="mm/dd/yyyy"></input>
+            <label for="offenseDate" id="offsenseDateLabel">Offense Date:</label>
+
+            <input type="text" className="form-control" id="offenseDate" ref="offenseDate" placeholder="mm/dd/yyyy"></input>
+
+          </div>
+
+        </div>
+
+        <div className="col-md-4">
+
+          <div className="form-group">
+
+            <label for="offenseLevel" id="offenseLevelLabel" >Misdemeanor/Felony</label>
+
+            <select className="form-control" id="offenseLevel" name="offenseLevel" ref="offenseLevel">
+              <option value="--">--</option>
+              <option value="Misdemeanor">Misdemeanor</option>
+              <option value="Felony">Felony</option>
+            </select>
+
+          </div>
+
+        </div>
+
+        <div className="col-md-4">
+
+          <div className="form-group">
+
+            <label for="offense" id="offsenseLabel">Offense:</label>
+
+            <input type="text" className="form-control" id="offense" ref="offense"></input>
+
+          </div>
+
+        </div>
+
+      </div>
+
+      <div className="row">
+
+        <div className="col-md-4">
+
+          <div className="form-group">
+
+            <label for="offenseDate2" id="offsenseDateLabel2">Offense Date:</label>
+
+            <input type="text" className="form-control" id="offenseDate2" ref="offenseDate2" placeholder="mm/dd/yyyy"></input>
+
+          </div>
+
+        </div>
+
+        <div className="col-md-4">
+
+          <div className="form-group">
+
+            <label for="offenseLevel2" id="offenseLevelLabel2" >Misdemeanor/Felony</label>
+
+            <select className="form-control" id="offenseLevel2" name="offenseLevel2" ref="offenseLevel2">
+              <option value="--">--</option>
+              <option value="Misdemeanor">Misdemeanor</option>
+              <option value="Felony">Felony</option>
+            </select>
+
+          </div>
+
+        </div>
+
+        <div className="col-md-4">
+
+          <div className="form-group">
+
+            <label for="offense2" id="offsenseLabel2">Offense:</label>
+
+            <input type="text" className="form-control" id="offense2" ref="offense2"></input>
+
+          </div>
+
+        </div>
+
+      </div>
+
+      <div className="row">
+
+        <div className="col-md-4">
+
+          <div className="form-group">
+
+            <label for="offenseDate3" id="offsenseDateLabel3">Offense Date:</label>
+
+            <input type="text" className="form-control" id="offenseDate3" ref="offenseDate3" placeholder="mm/dd/yyyy"></input>
+
+          </div>
+
+        </div>
+
+        <div className="col-md-4">
+
+          <div className="form-group">
+
+            <label for="offenseLevel3" id="offenseLevelLabel3" >Misdemeanor/Felony</label>
+
+            <select className="form-control" id="offenseLevel3" name="offenseLevel3" ref="offenseLevel3">
+              <option value="--">--</option>
+              <option value="Misdemeanor">Misdemeanor</option>
+              <option value="Felony">Felony</option>
+            </select>
+
+          </div>
+
+        </div>
+
+        <div className="col-md-4">
+
+          <div className="form-group">
+
+            <label for="offense3" id="offsenseLabel3">Offense:</label>
+
+            <input type="text" className="form-control" id="offense3" ref="offense3"></input>
+
+          </div>
+
+        </div>
+
+      </div>
+
+      <div className="row">
+
+        <div className="col-md-4">
+
+          <div className="form-group">
+
+            <label for="offenseDate4" id="offsenseDateLabel4">Offense Date:</label>
+
+            <input type="text" className="form-control" id="offenseDate4" ref="offenseDate4" placeholder="mm/dd/yyyy"></input>
+
+          </div>
+
+        </div>
+
+        <div className="col-md-4">
+
+          <div className="form-group">
+
+            <label for="offenseLevel4" id="offenseLevelLabel4" >Misdemeanor/Felony</label>
+
+            <select className="form-control" id="offenseLevel4" name="offenseLevel4" ref="offenseLevel4">
+              <option value="--">--</option>
+              <option value="Misdemeanor">Misdemeanor</option>
+              <option value="Felony">Felony</option>
+            </select>
+
+          </div>
+
+        </div>
+
+        <div className="col-md-4">
+
+          <div className="form-group">
+
+            <label for="offense4" id="offsenseLabel4">Offense:</label>
+
+            <input type="text" className="form-control" id="offense4" ref="offense4"></input>
+
+          </div>
+
+        </div>
+
+      </div>
+
+      <div className="row">
+
+        <div className="col-md-4">
+
+          <div className="form-group">
+
+            <label for="offenseDat5" id="offsenseDateLabel5">Offense Date:</label>
+
+            <input type="text" className="form-control" id="offenseDate5" ref="offenseDate5" placeholder="mm/dd/yyyy"></input>
+
+          </div>
+
+        </div>
+
+        <div className="col-md-4">
+
+          <div className="form-group">
+
+            <label for="offenseLevel5" id="offenseLevelLabel5" >Misdemeanor/Felony</label>
+
+            <select className="form-control" id="offenseLevel5" name="offenseLevel5" ref="offenseLevel5">
+              <option value="--">--</option>
+              <option value="Misdemeanor">Misdemeanor</option>
+              <option value="Felony">Felony</option>
+            </select>
+
+          </div>
+
+        </div>
+
+        <div className="col-md-4">
+
+          <div className="form-group">
+
+            <label for="offense5" id="offsenseLabel5">Offense:</label>
+
+            <input type="text" className="form-control" id="offense5" ref="offense5"></input>
+
+          </div>
+
+        </div>
+
+      </div>
+
+      <div className="row">
+
+        <div className="col-md-4">
+
+          <div className="form-group">
+
+            <label for="offenseDate6" id="offsenseDateLabel6">Offense Date:</label>
+
+            <input type="text" className="form-control" id="offenseDate6" ref="offenseDate6" placeholder="mm/dd/yyyy"></input>
+
+          </div>
+
+        </div>
+
+        <div className="col-md-4">
+
+          <div className="form-group">
+
+            <label for="offenseLevel6" id="offenseLevelLabel6" >Misdemeanor/Felony</label>
+
+            <select className="form-control" id="offenseLevel6" name="offenseLevel6" ref="offenseLevel6">
+              <option value="--">--</option>
+              <option value="Misdemeanor">Misdemeanor</option>
+              <option value="Felony">Felony</option>
+            </select>
+
+          </div>
+
+        </div>
+
+        <div className="col-md-4">
+
+          <div className="form-group">
+
+            <label for="offense6" id="offsenseLabel6">Offense:</label>
+
+            <input type="text" className="form-control" id="offense6" ref="offense6"></input>
+
+          </div>
+
+        </div>
 
       </div>
 
     </div>
-
-    <div className="col-md-4">
-
-      <div className="form-group">
-
-        <label for="offenseLevel" id="offenseLevelLabel" >Misdemeanor/Felony</label>
-
-        <select className="form-control" id="offenseLevel" name="offenseLevel" ref="offenseLevel">
-          <option value="--">--</option>
-          <option value="Misdemeanor">Misdemeanor</option>
-          <option value="Felony">Felony</option>
-        </select>
-
-      </div>
-
-    </div>
-
-    <div className="col-md-4">
-
-      <div className="form-group">
-
-        <label for="offense" id="offsenseLabel">Offense:</label>
-
-        <input type="text" className="form-control" id="offense" ref="offense"></input>
-
-      </div>
-
-    </div>
-
-  </div>
-
-  <div className="row">
-
-    <div className="col-md-4">
-
-      <div className="form-group">
-
-        <label for="offenseDate2" id="offsenseDateLabel2">Offense Date:</label>
-
-        <input type="text" className="form-control" id="offenseDate2" ref="offenseDate2" placeholder="mm/dd/yyyy"></input>
-
-      </div>
-
-    </div>
-
-    <div className="col-md-4">
-
-      <div className="form-group">
-
-        <label for="offenseLevel2" id="offenseLevelLabel2" >Misdemeanor/Felony</label>
-
-        <select className="form-control" id="offenseLevel2" name="offenseLevel2" ref="offenseLevel2">
-          <option value="--">--</option>
-          <option value="Misdemeanor">Misdemeanor</option>
-          <option value="Felony">Felony</option>
-        </select>
-
-      </div>
-
-    </div>
-
-    <div className="col-md-4">
-
-      <div className="form-group">
-
-        <label for="offense2" id="offsenseLabel2">Offense:</label>
-
-        <input type="text" className="form-control" id="offense2" ref="offense2"></input>
-
-      </div>
-
-    </div>
-
-  </div>
-
-  <div className="row">
-
-    <div className="col-md-4">
-
-      <div className="form-group">
-
-        <label for="offenseDate3" id="offsenseDateLabel3">Offense Date:</label>
-
-        <input type="text" className="form-control" id="offenseDate3" ref="offenseDate3" placeholder="mm/dd/yyyy"></input>
-
-      </div>
-
-    </div>
-
-    <div className="col-md-4">
-
-      <div className="form-group">
-
-        <label for="offenseLevel3" id="offenseLevelLabel3" >Misdemeanor/Felony</label>
-
-        <select className="form-control" id="offenseLevel3" name="offenseLevel3" ref="offenseLevel3">
-          <option value="--">--</option>
-          <option value="Misdemeanor">Misdemeanor</option>
-          <option value="Felony">Felony</option>
-        </select>
-
-      </div>
-
-    </div>
-
-    <div className="col-md-4">
-
-      <div className="form-group">
-
-        <label for="offense3" id="offsenseLabel3">Offense:</label>
-
-        <input type="text" className="form-control" id="offense3" ref="offense3"></input>
-
-      </div>
-
-    </div>
-
-  </div>
-
-  <div className="row">
-
-    <div className="col-md-4">
-
-      <div className="form-group">
-
-        <label for="offenseDate4" id="offsenseDateLabel4">Offense Date:</label>
-
-        <input type="text" className="form-control" id="offenseDate4" ref="offenseDate4" placeholder="mm/dd/yyyy"></input>
-
-      </div>
-
-    </div>
-
-    <div className="col-md-4">
-
-      <div className="form-group">
-
-        <label for="offenseLevel4" id="offenseLevelLabel4" >Misdemeanor/Felony</label>
-
-        <select className="form-control" id="offenseLevel4" name="offenseLevel4" ref="offenseLevel4">
-          <option value="--">--</option>
-          <option value="Misdemeanor">Misdemeanor</option>
-          <option value="Felony">Felony</option>
-        </select>
-
-      </div>
-
-    </div>
-
-    <div className="col-md-4">
-
-      <div className="form-group">
-
-        <label for="offense4" id="offsenseLabel4">Offense:</label>
-
-        <input type="text" className="form-control" id="offense4" ref="offense4"></input>
-
-      </div>
-
-    </div>
-
-  </div>
-
-  <div className="row">
-
-    <div className="col-md-4">
-
-      <div className="form-group">
-
-        <label for="offenseDat5" id="offsenseDateLabel5">Offense Date:</label>
-
-        <input type="text" className="form-control" id="offenseDate5" ref="offenseDate5" placeholder="mm/dd/yyyy"></input>
-
-      </div>
-
-    </div>
-
-    <div className="col-md-4">
-
-      <div className="form-group">
-
-        <label for="offenseLevel5" id="offenseLevelLabel5" >Misdemeanor/Felony</label>
-
-        <select className="form-control" id="offenseLevel5" name="offenseLevel5" ref="offenseLevel5">
-          <option value="--">--</option>
-          <option value="Misdemeanor">Misdemeanor</option>
-          <option value="Felony">Felony</option>
-        </select>
-
-      </div>
-
-    </div>
-
-    <div className="col-md-4">
-
-      <div className="form-group">
-
-        <label for="offense5" id="offsenseLabel5">Offense:</label>
-
-        <input type="text" className="form-control" id="offense5" ref="offense5"></input>
-
-      </div>
-
-    </div>
-
-  </div>
-
-  <div className="row">
-
-    <div className="col-md-4">
-
-      <div className="form-group">
-
-        <label for="offenseDate6" id="offsenseDateLabel6">Offense Date:</label>
-
-        <input type="text" className="form-control" id="offenseDate6" ref="offenseDate6" placeholder="mm/dd/yyyy"></input>
-
-      </div>
-
-    </div>
-
-    <div className="col-md-4">
-
-      <div className="form-group">
-
-        <label for="offenseLevel6" id="offenseLevelLabel6" >Misdemeanor/Felony</label>
-
-        <select className="form-control" id="offenseLevel6" name="offenseLevel6" ref="offenseLevel6">
-          <option value="--">--</option>
-          <option value="Misdemeanor">Misdemeanor</option>
-          <option value="Felony">Felony</option>
-        </select>
-
-      </div>
-
-    </div>
-
-    <div className="col-md-4">
-
-      <div className="form-group">
-
-        <label for="offense6" id="offsenseLabel6">Offense:</label>
-
-        <input type="text" className="form-control" id="offense6" ref="offense6"></input>
-
-      </div>
-
-    </div>
-
   </div>
 
 

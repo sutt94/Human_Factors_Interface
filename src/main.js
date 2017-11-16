@@ -6,6 +6,10 @@ import Criminal from './criminal.js';
 import Education from './education.js';
 import Experience from './experience.js';
 import References from './references.js';
+import Additional from './additional.js';
+import Waiver from './waiver.js';
+import Confirm from './confirm.js';
+
 
 const Main = () => (
 
@@ -24,6 +28,12 @@ const Main = () => (
       <Route exact path='/WorkHistory' component={Experience}/>
 
       <Route exact path='/References' component={References}/>
+
+      <Route exact path='/Waiver' component={Waiver}/>
+
+      <Route exact path='/Additional' component={Additional}/>
+
+      <Route exact path='/Confirm' component={Confirm}/>
 
 
     </Switch>

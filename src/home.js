@@ -5,8 +5,10 @@ import './index.css';
 
 class Home extends Component {
 
+
   processForm() {
 
+    localStorage.setItem("complete", '0');
     document.body.scrollTop = document.documentElement.scrollTop = 0;
     var errorDetected = 0;
     var continueLink = document.getElementById("continue");
@@ -241,7 +243,10 @@ class Home extends Component {
 
     if (errorDetected == 0){
 
-      document.getElementById("infoMessage").innerHTML = "Your information has been saved. Press continue below to continue to the next phase of the application " + "<i class='fa fa-check-circle-o' aria-hidden='true'></i>"
+      var complete = '1';
+      localStorage.setItem("complete", complete);
+
+      document.getElementById("infoMessage").innerHTML = "Your information has been saved. Press continue to move on to the next phase of the application " + "<i class='fa fa-check-circle-o' aria-hidden='true'></i>"
 
         document.getElementById("infoMessage").style.color = "green";
 
@@ -265,6 +270,10 @@ class Home extends Component {
   }
 
   componentDidMount () {
+
+    if(localStorage.getItem("complete") == '1') {
+    document.getElementById("continue").style.visibility = 'visible';
+      }
 
     if(localStorage.getItem("firstName") !== null) {
       this.refs.firstName.value = localStorage.getItem("firstName");
@@ -358,7 +367,7 @@ return (
         </div>
 
         <div className="col-md-6 text-center small-top-buffer">
-          <h3>Personal Information</h3><h6>(All Fields Required)</h6>
+          <h3>Personal Information</h3><h6>Please fill out the following information about yourself.(All Fields Required)</h6>
         </div>
 
         <div className="col-md-3">
@@ -389,278 +398,281 @@ return (
       </div>
 
 
-      <div className="row top-buffer medium-bottom-buffer">
+      <div className='card bg-light medium-bottom-buffer '>
+        <div class="card-body">
+          <div className="row top-buffer medium-bottom-buffer">
 
-        <div className="col-md-4">
+            <div className="col-md-4">
 
-          <div className="form-group">
+              <div className="form-group">
 
-            <label for="firstName" id="firstNameLabel">First Name:</label>
+                <label for="firstName" id="firstNameLabel">First Name:</label>
 
-            <input type="text" className="form-control" id="firstName" ref="firstName" required></input>
+                <input type="text" className="form-control" id="firstName" ref="firstName" required></input>
+
+              </div>
+
+            </div>
+
+            <div className="col-md-4">
+
+              <div className="form-group">
+
+                <label for="middleName" id="middleNameLabel">Middle Name:</label>
+
+                <input type="text" className="form-control" id="middleName" ref="middleName"></input>
+
+              </div>
+
+            </div>
+
+            <div className="col-md-4">
+
+              <div className="form-group">
+
+                <label for="lastName" id="lastNameLabel">Last Name:</label>
+
+                <input type="text" className="form-control" id="lastName" ref="lastName"></input>
+
+              </div>
+
+            </div>
+
+          </div>
+
+
+          <div className="row medium-bottom-buffer">
+
+            <div className="col-md-6">
+
+              <div className="form-group">
+
+                <label for="street" id="streetLabel">Street:</label>
+
+                <input type="text" className="form-control" id="street" ref="street"></input>
+
+              </div>
+
+
+            </div>
+
+            <div className="col-md-3">
+
+              <div className="form-group">
+
+                <label for="city" id="cityLabel">City:</label>
+
+                <input type="text" className="form-control" id="city" ref="city"></input>
+
+              </div>
+
+
+            </div>
+
+            <div className="col-md-3">
+
+              <div className="form-group">
+
+                <label for="state" id="stateLabel" >State:</label>
+
+                <select className="form-control" id="state" name="state" ref="state">
+                  <option value="AK">Alaska</option>
+                  <option value="AL">Alabama</option>
+                  <option value="AR">Arkansas</option>
+                  <option value="AZ">Arizona</option>
+                  <option value="CA">California</option>
+                  <option value="CO">Colorado</option>
+                  <option value="CT">Connecticut</option>
+                  <option value="DC">District of Columbia</option>
+                  <option value="DE">Delaware</option>
+                  <option value="FL">Florida</option>
+                  <option value="GA">Georgia</option>
+                  <option value="HI">Hawaii</option>
+                  <option value="IA">Iowa</option>
+                  <option value="ID">Idaho</option>
+                  <option value="IL">Illinois</option>
+                  <option value="IN">Indiana</option>
+                  <option value="KS">Kansas</option>
+                  <option value="KY">Kentucky</option>
+                  <option value="LA">Louisiana</option>
+                  <option value="MA">Massachusetts</option>
+                  <option value="MD">Maryland</option>
+                  <option value="ME">Maine</option>
+                  <option value="MI">Michigan</option>
+                  <option value="MN">Minnesota</option>
+                  <option value="MO">Missouri</option>
+                  <option value="MS">Mississippi</option>
+                  <option value="MT">Montana</option>
+                  <option value="NC">North Carolina</option>
+                  <option value="ND">North Dakota</option>
+                  <option value="NE">Nebraska</option>
+                  <option value="NH">New Hampshire</option>
+                  <option value="NJ">New Jersey</option>
+                  <option value="NM">New Mexico</option>
+                  <option value="NV">Nevada</option>
+                  <option value="NY">New York</option>
+                  <option value="OH">Ohio</option>
+                  <option value="OK">Oklahoma</option>
+                  <option value="OR">Oregon</option>
+                  <option value="PA">Pennsylvania</option>
+                  <option value="PR">Puerto Rico</option>
+                  <option value="RI">Rhode Island</option>
+                  <option value="SC">South Carolina</option>
+                  <option value="SD">South Dakota</option>
+                  <option value="TN">Tennessee</option>
+                  <option value="TX">Texas</option>
+                  <option value="UT">Utah</option>
+                  <option value="VA">Virginia</option>
+                  <option value="VT">Vermont</option>
+                  <option value="WA">Washington</option>
+                  <option value="WI">Wisconsin</option>
+                  <option value="WV">West Virginia</option>
+                  <option value="WY">Wyoming</option>
+                </select>
+
+              </div>
+
+            </div>
+
+
+          </div>
+
+
+
+          <div className="row medium-bottom-buffer">
+
+            <div className="col-md-3">
+
+              <div className="form-group">
+
+                <label for="zip" id="zipLabel">ZIP Code (5 Digits)</label>
+
+                <input type="text" className="form-control" id="zip" ref="zip" pattern="[0-9]{5}" title="Five digit zip code" placeholder="#####" />
+
+              </div>
+
+            </div>
+
+
+            <div className="col-md-3">
+
+              <div className="form-group">
+
+
+                <label className="control-label" for="ssn" id="ssnLabel">SSN:</label>
+
+                <input type="email" class="form-control" id="ssn" ref="ssn" placeholder="###-##-####" maxlength="12"></input>
+
+
+              </div>
+
+            </div>
+
+            <div className="col-md-3">
+
+              <div className="form-group">
+
+
+                <label className="control-label" for="phone" id="phoneLabel">Phone Number:</label>
+
+                <input type="email" class="form-control" id="phone" ref="phone" placeholder="##########" maxlength="10"></input>
+
+
+              </div>
+
+            </div>
+
+            <div className="col-md-3">
+
+              <div className="form-group">
+
+
+                <label className="control-label" for="email" id="emailLabel">Email:</label>
+
+                <input type="email" class="form-control" id="email" ref="email" placeholder="example@example.com"></input>
+
+
+              </div>
+
+            </div>
+
+          </div>
+
+          <div className="row medium-bottom-buffer">
+
+            <div className="col-md-2">
+
+              <div className="form-group">
+
+                <label for="age" id="ageLabel" >Are you 18 or older?</label>
+
+                <select className="form-control" id="age" name="age" ref="age">
+                  <option value="No">No</option>
+                  <option value="Yes">Yes</option>
+                </select>
+
+              </div>
+
+            </div>
+
+            <div className="col-md-3">
+
+              <div className="form-group">
+
+                <label for="position" id="positionLabel" >Desired Position:</label>
+
+                <select className="form-control" id="position" name="position" ref="position">
+                  <option value="Developer">Developer</option>
+                  <option value="Driver">Driver</option>
+                  <option value="Analyst">Analyst</option>
+                </select>
+
+              </div>
+
+            </div>
+
+            <div className="col-md-3">
+
+              <div className="form-group">
+
+                <label for="salary" id="salaryLabel" >Desired Salary:</label>
+
+                <select className="form-control" id="salary" name="salary" ref="salary">
+                  <option value="Other">Other</option>
+                  <option value="$31,000-$40,000">$31,000-$40,000</option>
+                  <option value="$41,000-$50,000">$41,000-$50,000</option>
+                  <option value="$51,000-$60,000">$51,000-$60,000</option>
+                  <option value="$61,000-$70,000">$61,000-$70,000</option>
+                  <option value="$71,000-$80,000">$71,000-$80,000</option>
+                  <option value="$81,000-$90,000">$81,000-$90,000</option>
+                  <option value="$91,000-$100,000">$91,000-$100,000</option>
+                </select>
+
+              </div>
+
+            </div>
+
+            <div className="col-md-3">
+
+              <div className="form-group">
+
+                <label for="military" id="militaryLabel" >Have you served in the military?</label>
+
+                <select className="form-control" id="military" name="military" ref="military">
+                  <option value="No">No</option>
+                  <option value="Yes">Yes</option>
+                </select>
+
+              </div>
+
+            </div>
+
+
 
           </div>
 
         </div>
-
-        <div className="col-md-4">
-
-          <div className="form-group">
-
-            <label for="middleName" id="middleNameLabel">Middle Name:</label>
-
-            <input type="text" className="form-control" id="middleName" ref="middleName"></input>
-
-          </div>
-
-        </div>
-
-        <div className="col-md-4">
-
-          <div className="form-group">
-
-            <label for="lastName" id="lastNameLabel">Last Name:</label>
-
-            <input type="text" className="form-control" id="lastName" ref="lastName"></input>
-
-          </div>
-
-        </div>
-
       </div>
-
-
-      <div className="row medium-bottom-buffer">
-
-        <div className="col-md-6">
-
-          <div className="form-group">
-
-            <label for="street" id="streetLabel">Street:</label>
-
-            <input type="text" className="form-control" id="street" ref="street"></input>
-
-          </div>
-
-
-        </div>
-
-        <div className="col-md-3">
-
-          <div className="form-group">
-
-            <label for="city" id="cityLabel">City:</label>
-
-            <input type="text" className="form-control" id="city" ref="city"></input>
-
-          </div>
-
-
-        </div>
-
-        <div className="col-md-3">
-
-          <div className="form-group">
-
-            <label for="state" id="stateLabel" >State:</label>
-
-            <select className="form-control" id="state" name="state" ref="state">
-              <option value="AK">Alaska</option>
-              <option value="AL">Alabama</option>
-              <option value="AR">Arkansas</option>
-              <option value="AZ">Arizona</option>
-              <option value="CA">California</option>
-              <option value="CO">Colorado</option>
-              <option value="CT">Connecticut</option>
-              <option value="DC">District of Columbia</option>
-              <option value="DE">Delaware</option>
-              <option value="FL">Florida</option>
-              <option value="GA">Georgia</option>
-              <option value="HI">Hawaii</option>
-              <option value="IA">Iowa</option>
-              <option value="ID">Idaho</option>
-              <option value="IL">Illinois</option>
-              <option value="IN">Indiana</option>
-              <option value="KS">Kansas</option>
-              <option value="KY">Kentucky</option>
-              <option value="LA">Louisiana</option>
-              <option value="MA">Massachusetts</option>
-              <option value="MD">Maryland</option>
-              <option value="ME">Maine</option>
-              <option value="MI">Michigan</option>
-              <option value="MN">Minnesota</option>
-              <option value="MO">Missouri</option>
-              <option value="MS">Mississippi</option>
-              <option value="MT">Montana</option>
-              <option value="NC">North Carolina</option>
-              <option value="ND">North Dakota</option>
-              <option value="NE">Nebraska</option>
-              <option value="NH">New Hampshire</option>
-              <option value="NJ">New Jersey</option>
-              <option value="NM">New Mexico</option>
-              <option value="NV">Nevada</option>
-              <option value="NY">New York</option>
-              <option value="OH">Ohio</option>
-              <option value="OK">Oklahoma</option>
-              <option value="OR">Oregon</option>
-              <option value="PA">Pennsylvania</option>
-              <option value="PR">Puerto Rico</option>
-              <option value="RI">Rhode Island</option>
-              <option value="SC">South Carolina</option>
-              <option value="SD">South Dakota</option>
-              <option value="TN">Tennessee</option>
-              <option value="TX">Texas</option>
-              <option value="UT">Utah</option>
-              <option value="VA">Virginia</option>
-              <option value="VT">Vermont</option>
-              <option value="WA">Washington</option>
-              <option value="WI">Wisconsin</option>
-              <option value="WV">West Virginia</option>
-              <option value="WY">Wyoming</option>
-            </select>
-
-          </div>
-
-        </div>
-
-
-      </div>
-
-
-
-      <div className="row medium-bottom-buffer">
-
-        <div className="col-md-3">
-
-          <div className="form-group">
-
-            <label for="zip" id="zipLabel">ZIP Code (5 Digits)</label>
-
-            <input type="text" className="form-control" id="zip" ref="zip" pattern="[0-9]{5}" title="Five digit zip code" placeholder="#####" />
-
-          </div>
-
-        </div>
-
-
-        <div className="col-md-3">
-
-          <div className="form-group">
-
-
-            <label className="control-label" for="ssn" id="ssnLabel">SSN:</label>
-
-            <input type="email" class="form-control" id="ssn" ref="ssn" placeholder="###-##-####" maxlength="12"></input>
-
-
-          </div>
-
-        </div>
-
-        <div className="col-md-3">
-
-          <div className="form-group">
-
-
-            <label className="control-label" for="phone" id="phoneLabel">Phone Number:</label>
-
-            <input type="email" class="form-control" id="phone" ref="phone" placeholder="##########" maxlength="10"></input>
-
-
-          </div>
-
-        </div>
-
-        <div className="col-md-3">
-
-          <div className="form-group">
-
-
-            <label className="control-label" for="email" id="emailLabel">Email:</label>
-
-            <input type="email" class="form-control" id="email" ref="email" placeholder="example@example.com"></input>
-
-
-          </div>
-
-        </div>
-
-      </div>
-
-      <div className="row medium-bottom-buffer">
-
-        <div className="col-md-2">
-
-          <div className="form-group">
-
-            <label for="age" id="ageLabel" >Are you 18 or older?</label>
-
-            <select className="form-control" id="age" name="age" ref="age">
-              <option value="No">No</option>
-              <option value="Yes">Yes</option>
-            </select>
-
-          </div>
-
-        </div>
-
-        <div className="col-md-3">
-
-          <div className="form-group">
-
-            <label for="position" id="positionLabel" >Desired Position:</label>
-
-            <select className="form-control" id="position" name="position" ref="position">
-              <option value="Developer">Developer</option>
-              <option value="Driver">Driver</option>
-              <option value="Analyst">Analyst</option>
-            </select>
-
-          </div>
-
-        </div>
-
-        <div className="col-md-3">
-
-          <div className="form-group">
-
-            <label for="salary" id="salaryLabel" >Desired Salary:</label>
-
-            <select className="form-control" id="salary" name="salary" ref="salary">
-              <option value="Other">Other</option>
-              <option value="$31,000-$40,000">$31,000-$40,000</option>
-              <option value="$41,000-$50,000">$41,000-$50,000</option>
-              <option value="$51,000-$60,000">$51,000-$60,000</option>
-              <option value="$61,000-$70,000">$61,000-$70,000</option>
-              <option value="$71,000-$80,000">$71,000-$80,000</option>
-              <option value="$81,000-$90,000">$81,000-$90,000</option>
-              <option value="$91,000-$100,000">$91,000-$100,000</option>
-            </select>
-
-          </div>
-
-        </div>
-
-        <div className="col-md-3">
-
-          <div className="form-group">
-
-            <label for="military" id="militaryLabel" >Have you served in the military?</label>
-
-            <select className="form-control" id="military" name="military" ref="military">
-              <option value="No">No</option>
-              <option value="Yes">Yes</option>
-            </select>
-
-          </div>
-
-        </div>
-
-
-
-      </div>
-
-
 
 
       <div className="row bottom-buffer">

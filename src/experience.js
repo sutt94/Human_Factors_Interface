@@ -3,7 +3,9 @@ import { Link } from 'react-router-dom';
 
 class Experience extends Component {
 
+
 processForm() {
+  localStorage.setItem("complete5", '0');
   document.body.scrollTop = document.documentElement.scrollTop = 0;
   var continueLink = document.getElementById("continue");
   var infoMessage = document.getElementById("infoMessage");
@@ -449,7 +451,10 @@ processForm() {
 
   if (errorDetected == 0){
 
-    document.getElementById("infoMessage").innerHTML = "Your information has been saved. Press continue below to continue to the next phase of the application " + "<i class='fa fa-check-circle-o' aria-hidden='true'></i>"
+    var complete = '1';
+    localStorage.setItem("complete5", complete);
+
+    document.getElementById("infoMessage").innerHTML = "Your information has been saved. Press continue to move on to the next phase of the application " + "<i class='fa fa-check-circle-o' aria-hidden='true'></i>"
 
       document.getElementById("infoMessage").style.color = "green";
 
@@ -472,6 +477,10 @@ processForm() {
 
 
 componentDidMount () {
+
+  if(localStorage.getItem("complete5") == '1') {
+  document.getElementById("continue").style.visibility = 'visible';
+    }
 
   if(localStorage.getItem("employerName") !== null) {
     this.refs.employerName.value = localStorage.getItem("employerName");
@@ -673,7 +682,7 @@ render() {
     </div>
 
     <div className="col-md-6 text-center small-top-buffer">
-      <h3>Work Experience</h3><h6>(Fill out fields that apply to you)</h6>
+      <h3>Work Experience</h3><h6>Provide information on past employers.(Fill out fields that apply to you)</h6>
     </div>
 
     <div className="col-md-3">
@@ -705,528 +714,542 @@ render() {
 
   </div>
 
-  <div className="row">
+  <div className='card bg-light medium-bottom-buffer '>
+    <div class="card-body">
 
-    <div className="col-md-3">
+      <div className="row">
 
-      <div className="form-group">
+        <div className="col-md-3">
 
-        <label for="employerName" id="employerNameLabel">Employer Name:</label>
+          <div className="form-group">
 
-        <input type="text" className="form-control" id="employerName" ref="employerName" required></input>
+            <label for="employerName" id="employerNameLabel">Employer Name:</label>
 
-      </div>
+            <input type="text" className="form-control" id="employerName" ref="employerName" required></input>
 
-    </div>
+          </div>
 
-    <div className="col-md-4">
+        </div>
 
-      <div className="form-group">
+        <div className="col-md-4">
 
-        <label for="employerAddress" id="employerAddressLabel">Address:</label>
+          <div className="form-group">
 
-        <input type="text" className="form-control" id="employerAddress" ref="employerAddress"></input>
+            <label for="employerAddress" id="employerAddressLabel">Address:</label>
 
-      </div>
+            <input type="text" className="form-control" id="employerAddress" ref="employerAddress"></input>
 
-    </div>
+          </div>
 
-    <div className="col-md-2">
+        </div>
 
-      <div className="form-group">
+        <div className="col-md-2">
 
-        <label for="employerPhone" id="employerPhoneLabel">Phone Number:</label>
+          <div className="form-group">
 
-        <input type="text" className="form-control" id="employerPhone" ref="employerPhone" placeholder="##########"></input>
+            <label for="employerPhone" id="employerPhoneLabel">Phone Number:</label>
 
-      </div>
+            <input type="text" className="form-control" id="employerPhone" ref="employerPhone" placeholder="##########"></input>
 
-    </div>
+          </div>
 
-    <div className="col-md-3">
+        </div>
 
-      <div className="form-group">
+        <div className="col-md-3">
 
-        <label for="employerEmail" id="employerEmailLabel">Email:</label>
+          <div className="form-group">
 
-        <input type="text" className="form-control" id="employerEmail" ref="employerEmail" placeholder="example@example.com"></input>
+            <label for="employerEmail" id="employerEmailLabel">Email:</label>
 
-      </div>
+            <input type="text" className="form-control" id="employerEmail" ref="employerEmail" placeholder="example@example.com"></input>
 
-    </div>
+          </div>
 
-  </div>
-
-  <div className="row">
-
-    <div className="col-md-2">
-
-      <div className="form-group">
-
-        <label for="supervisor" id="supervisorLabel">Last Supervisor:</label>
-
-        <input type="text" className="form-control" id="supervisor" ref="supervisor"></input>
+        </div>
 
       </div>
 
-    </div>
+      <div className="row">
 
-    <div className="col-md-2">
+        <div className="col-md-2">
 
-      <div className="form-group">
+          <div className="form-group">
 
-        <label for="title" id="titleLabel">Last Title:</label>
+            <label for="supervisor" id="supervisorLabel">Last Supervisor:</label>
 
-        <input type="text" className="form-control" id="title" ref="title"></input>
+            <input type="text" className="form-control" id="supervisor" ref="supervisor"></input>
+
+          </div>
+
+        </div>
+
+        <div className="col-md-2">
+
+          <div className="form-group">
+
+            <label for="title" id="titleLabel">Last Title:</label>
+
+            <input type="text" className="form-control" id="title" ref="title"></input>
+
+          </div>
+
+        </div>
+
+        <div className="col-md-2">
+
+          <div className="form-group">
+
+            <label for="startDate" id="startDateLabel">Start Date:</label>
+
+            <input type="text" className="form-control" id="startDate" ref="startDate" placeholder="mm/dd/yyyy"></input>
+
+          </div>
+
+        </div>
+
+        <div className="col-md-2">
+
+          <div className="form-group">
+
+            <label for="endDate" id="endDateLabel">End Date:</label>
+
+            <input type="text" className="form-control" id="endDate" ref="endDate" placeholder="mm/dd/yyyy"></input>
+
+          </div>
+
+        </div>
+
+        <div className="col-md-2">
+
+          <div className="form-group">
+
+            <label for="startSalary" id="startSalaryLabel">Starting Salary:</label>
+
+            <input type="text" className="form-control" id="startSalary" ref="startSalary"></input>
+
+          </div>
+
+        </div>
+
+        <div className="col-md-2">
+
+          <div className="form-group">
+
+            <label for="endSalary" id="endSalaryLabel">End Salary:</label>
+
+            <input type="text" className="form-control" id="endSalary" ref="endSalary"></input>
+
+          </div>
+
+        </div>
+
+
 
       </div>
 
-    </div>
+      <div className="row">
 
-    <div className="col-md-2">
+        <div className="col-md-8">
 
-      <div className="form-group">
+          <div className="form-group">
 
-        <label for="startDate" id="startDateLabel">Start Date:</label>
+            <label for="leave" id="leaveLabel">Reason for leaving:</label>
 
-        <input type="text" className="form-control" id="startDate" ref="startDate" placeholder="mm/dd/yyyy"></input>
+            <input type="text" className="form-control" id="leave" ref="leave"></input>
 
-      </div>
+          </div>
 
-    </div>
+        </div>
 
-    <div className="col-md-2">
+        <div className="col-md-3">
 
-      <div className="form-group">
+          <div className="form-group">
 
-        <label for="endDate" id="endDateLabel">End Date:</label>
+            <label for="contact" id="contactLabel" >May we contact this employer?</label>
 
-        <input type="text" className="form-control" id="endDate" ref="endDate" placeholder="mm/dd/yyyy"></input>
+            <select className="form-control" id="contact" name="contact" ref="contact">
+              <option value="No">No</option>
+              <option value="Yes">Yes</option>
+            </select>
 
-      </div>
+          </div>
 
-    </div>
-
-    <div className="col-md-2">
-
-      <div className="form-group">
-
-        <label for="startSalary" id="startSalaryLabel">Starting Salary:</label>
-
-        <input type="text" className="form-control" id="startSalary" ref="startSalary"></input>
+        </div>
 
       </div>
 
-    </div>
 
-    <div className="col-md-2">
 
-      <div className="form-group">
+      <div className="row medium-bottom-buffer">
+        <div className="col-md-12">
+          <div className="form-group">
+            <label for="duties">List duties performed, skills used, and advancements and promotions earned:</label>
+            <textarea class="form-control" rows="5" id="duties" ref="duties"></textarea>
+          </div>
 
-        <label for="endSalary" id="endSalaryLabel">End Salary:</label>
-
-        <input type="text" className="form-control" id="endSalary" ref="endSalary"></input>
-
+        </div>
       </div>
 
     </div>
-
-
-
-  </div>
-
-  <div className="row">
-
-    <div className="col-md-8">
-
-      <div className="form-group">
-
-        <label for="leave" id="leaveLabel">Reason for leaving:</label>
-
-        <input type="text" className="form-control" id="leave" ref="leave"></input>
-
-      </div>
-
-    </div>
-
-    <div className="col-md-3">
-
-      <div className="form-group">
-
-        <label for="contact" id="contactLabel" >May we contact this employer?</label>
-
-        <select className="form-control" id="contact" name="contact" ref="contact">
-          <option value="No">No</option>
-          <option value="Yes">Yes</option>
-        </select>
-
-      </div>
-
-    </div>
-
-  </div>
-
-<div className="row medium-bottom-buffer">
-<div className="col-md-12">
-  <div className="form-group">
-    <label for="duties">List duties performed, skills used, and advancements and promotions earned:</label>
-    <textarea class="form-control" rows="5" id="duties" ref="duties"></textarea>
-  </div>
-
-</div>
-</div>
-
-
-
-
-  <div className="row">
-
-    <div className="col-md-3">
-
-      <div className="form-group">
-
-        <label for="employerName2" id="employerNameLabel2">Employer Name:</label>
-
-        <input type="text" className="form-control" id="employerName2" ref="employerName2" required></input>
-
-      </div>
-
-    </div>
-
-    <div className="col-md-4">
-
-      <div className="form-group">
-
-        <label for="employerAddress2" id="employerAddressLabel2">Address:</label>
-
-        <input type="text" className="form-control" id="employerAddress2" ref="employerAddress2"></input>
-
-      </div>
-
-    </div>
-
-    <div className="col-md-2">
-
-      <div className="form-group">
-
-        <label for="employerPhone2" id="employerPhoneLabel2">Phone Number:</label>
-
-        <input type="text" className="form-control" id="employerPhone2" ref="employerPhone2" placeholder="##########"></input>
-
-      </div>
-
-    </div>
-
-    <div className="col-md-3">
-
-      <div className="form-group">
-
-        <label for="employerEmail2" id="employerEmailLabel2">Email:</label>
-
-        <input type="text" className="form-control" id="employerEmail2" ref="employerEmail2" placeholder="example@example.com"></input>
-
-      </div>
-
-    </div>
-
-  </div>
-
-  <div className="row">
-
-    <div className="col-md-2">
-
-      <div className="form-group">
-
-        <label for="supervisor2" id="supervisorLabel2">Last Supervisor:</label>
-
-        <input type="text" className="form-control" id="supervisor2" ref="supervisor2"></input>
-
-      </div>
-
-    </div>
-
-    <div className="col-md-2">
-
-      <div className="form-group">
-
-        <label for="title2" id="titleLabel2">Last Title:</label>
-
-        <input type="text" className="form-control" id="title2" ref="title2"></input>
-
-      </div>
-
-    </div>
-
-    <div className="col-md-2">
-
-      <div className="form-group">
-
-        <label for="startDate2" id="startDateLabel2">Start Date:</label>
-
-        <input type="text" className="form-control" id="startDate2" ref="startDate2" placeholder="mm/dd/yyyy"></input>
-
-      </div>
-
-    </div>
-
-    <div className="col-md-2">
-
-      <div className="form-group">
-
-        <label for="endDate2" id="endDateLabel2">End Date:</label>
-
-        <input type="text" className="form-control" id="endDate2" ref="endDate2" placeholder="mm/dd/yyyy"></input>
-
-      </div>
-
-    </div>
-
-    <div className="col-md-2">
-
-      <div className="form-group">
-
-        <label for="startSalary2" id="startSalaryLabel2">Starting Salary:</label>
-
-        <input type="text" className="form-control" id="startSalary2" ref="startSalary2"></input>
-
-      </div>
-
-    </div>
-
-    <div className="col-md-2">
-
-      <div className="form-group">
-
-        <label for="endSalary2" id="endSalaryLabel2">End Salary:</label>
-
-        <input type="text" className="form-control" id="endSalary2" ref="endSalary2"></input>
-
-      </div>
-
-    </div>
-
-
-
-  </div>
-
-  <div className="row">
-
-    <div className="col-md-8">
-
-      <div className="form-group">
-
-        <label for="leave2" id="leaveLabel2">Reason for leaving:</label>
-
-        <input type="text" className="form-control" id="leave2" ref="leave2"></input>
-
-      </div>
-
-    </div>
-
-    <div className="col-md-3">
-
-      <div className="form-group">
-
-        <label for="contact2" id="contactLabel2" >May we contact this employer?</label>
-
-        <select className="form-control" id="contact2" name="contact2" ref="contact2">
-          <option value="No">No</option>
-          <option value="Yes">Yes</option>
-        </select>
-
-      </div>
-
-    </div>
-
-  </div>
-
-<div className="row medium-bottom-buffer">
-<div className="col-md-12">
-  <div className="form-group">
-    <label for="duties2">List duties performed, skills used, and advancements and promotions earned:</label>
-    <textarea class="form-control" rows="5" id="duties2" ref="duties2"></textarea>
-  </div>
-
-</div>
-</div>
-
-
-
-
-<div className="row">
-
-  <div className="col-md-3">
-
-    <div className="form-group">
-
-      <label for="employerName3" id="employerNameLabel3">Employer Name:</label>
-
-      <input type="text" className="form-control" id="employerName3" ref="employerName3" required></input>
-
-    </div>
-
-  </div>
-
-  <div className="col-md-4">
-
-    <div className="form-group">
-
-      <label for="employerAddress3" id="employerAddressLabel3">Address:</label>
-
-      <input type="text" className="form-control" id="employerAddress3" ref="employerAddress3"></input>
-
-    </div>
-
-  </div>
-
-  <div className="col-md-2">
-
-    <div className="form-group">
-
-      <label for="employerPhone3" id="employerPhoneLabel3">Phone Number:</label>
-
-      <input type="text" className="form-control" id="employerPhone3" ref="employerPhone3" placeholder="##########"></input>
-
-    </div>
-
-  </div>
-
-  <div className="col-md-3">
-
-    <div className="form-group">
-
-      <label for="employerEmail3" id="employerEmailLabel3">Email:</label>
-
-      <input type="text" className="form-control" id="employerEmail3" ref="employerEmail3" placeholder="example@example.com"></input>
-
-    </div>
-
-  </div>
-
-</div>
-
-<div className="row">
-
-  <div className="col-md-2">
-
-    <div className="form-group">
-
-      <label for="supervisor3" id="supervisorLabel3">Last Supervisor:</label>
-
-      <input type="text" className="form-control" id="supervisor3" ref="supervisor3"></input>
-
-    </div>
-
-  </div>
-
-  <div className="col-md-2">
-
-    <div className="form-group">
-
-      <label for="title3" id="titleLabel3">Last Title:</label>
-
-      <input type="text" className="form-control" id="title3" ref="title3"></input>
-
-    </div>
-
-  </div>
-
-  <div className="col-md-2">
-
-    <div className="form-group">
-
-      <label for="startDate3" id="startDateLabel3">Start Date:</label>
-
-      <input type="text" className="form-control" id="startDate3" ref="startDate3" placeholder="mm/dd/yyyy"></input>
-
-    </div>
-
-  </div>
-
-  <div className="col-md-2">
-
-    <div className="form-group">
-
-      <label for="endDate3" id="endDateLabel3">End Date:</label>
-
-      <input type="text" className="form-control" id="endDate3" ref="endDate3" placeholder="mm/dd/yyyy"></input>
-
-    </div>
-
-  </div>
-
-  <div className="col-md-2">
-
-    <div className="form-group">
-
-      <label for="startSalary3" id="startSalaryLabel3">Starting Salary:</label>
-
-      <input type="text" className="form-control" id="startSalary3" ref="startSalary3"></input>
-
-    </div>
-
-  </div>
-
-  <div className="col-md-2">
-
-    <div className="form-group">
-
-      <label for="endSalary3" id="endSalaryLabel3">End Salary:</label>
-
-      <input type="text" className="form-control" id="endSalary3" ref="endSalary3"></input>
-
-    </div>
-
   </div>
 
 
 
-</div>
+  <div className='card bg-light medium-bottom-buffer '>
+    <div class="card-body">
+      <div className="row">
 
-<div className="row">
+        <div className="col-md-3">
 
-  <div className="col-md-8">
+          <div className="form-group">
 
-    <div className="form-group">
+            <label for="employerName2" id="employerNameLabel2">Employer Name:</label>
 
-      <label for="leave3" id="leaveLabel3">Reason for leaving:</label>
+            <input type="text" className="form-control" id="employerName2" ref="employerName2" required></input>
 
-      <input type="text" className="form-control" id="leave3" ref="leave3"></input>
+          </div>
+
+        </div>
+
+        <div className="col-md-4">
+
+          <div className="form-group">
+
+            <label for="employerAddress2" id="employerAddressLabel2">Address:</label>
+
+            <input type="text" className="form-control" id="employerAddress2" ref="employerAddress2"></input>
+
+          </div>
+
+        </div>
+
+        <div className="col-md-2">
+
+          <div className="form-group">
+
+            <label for="employerPhone2" id="employerPhoneLabel2">Phone Number:</label>
+
+            <input type="text" className="form-control" id="employerPhone2" ref="employerPhone2" placeholder="##########"></input>
+
+          </div>
+
+        </div>
+
+        <div className="col-md-3">
+
+          <div className="form-group">
+
+            <label for="employerEmail2" id="employerEmailLabel2">Email:</label>
+
+            <input type="text" className="form-control" id="employerEmail2" ref="employerEmail2" placeholder="example@example.com"></input>
+
+          </div>
+
+        </div>
+
+      </div>
+
+      <div className="row">
+
+        <div className="col-md-2">
+
+          <div className="form-group">
+
+            <label for="supervisor2" id="supervisorLabel2">Last Supervisor:</label>
+
+            <input type="text" className="form-control" id="supervisor2" ref="supervisor2"></input>
+
+          </div>
+
+        </div>
+
+        <div className="col-md-2">
+
+          <div className="form-group">
+
+            <label for="title2" id="titleLabel2">Last Title:</label>
+
+            <input type="text" className="form-control" id="title2" ref="title2"></input>
+
+          </div>
+
+        </div>
+
+        <div className="col-md-2">
+
+          <div className="form-group">
+
+            <label for="startDate2" id="startDateLabel2">Start Date:</label>
+
+            <input type="text" className="form-control" id="startDate2" ref="startDate2" placeholder="mm/dd/yyyy"></input>
+
+          </div>
+
+        </div>
+
+        <div className="col-md-2">
+
+          <div className="form-group">
+
+            <label for="endDate2" id="endDateLabel2">End Date:</label>
+
+            <input type="text" className="form-control" id="endDate2" ref="endDate2" placeholder="mm/dd/yyyy"></input>
+
+          </div>
+
+        </div>
+
+        <div className="col-md-2">
+
+          <div className="form-group">
+
+            <label for="startSalary2" id="startSalaryLabel2">Starting Salary:</label>
+
+            <input type="text" className="form-control" id="startSalary2" ref="startSalary2"></input>
+
+          </div>
+
+        </div>
+
+        <div className="col-md-2">
+
+          <div className="form-group">
+
+            <label for="endSalary2" id="endSalaryLabel2">End Salary:</label>
+
+            <input type="text" className="form-control" id="endSalary2" ref="endSalary2"></input>
+
+          </div>
+
+        </div>
+
+
+
+      </div>
+
+      <div className="row">
+
+        <div className="col-md-8">
+
+          <div className="form-group">
+
+            <label for="leave2" id="leaveLabel2">Reason for leaving:</label>
+
+            <input type="text" className="form-control" id="leave2" ref="leave2"></input>
+
+          </div>
+
+        </div>
+
+        <div className="col-md-3">
+
+          <div className="form-group">
+
+            <label for="contact2" id="contactLabel2" >May we contact this employer?</label>
+
+            <select className="form-control" id="contact2" name="contact2" ref="contact2">
+              <option value="No">No</option>
+              <option value="Yes">Yes</option>
+            </select>
+
+          </div>
+
+        </div>
+
+      </div>
+
+      <div className="row medium-bottom-buffer">
+        <div className="col-md-12">
+          <div className="form-group">
+            <label for="duties2">List duties performed, skills used, and advancements and promotions earned:</label>
+            <textarea class="form-control" rows="5" id="duties2" ref="duties2"></textarea>
+          </div>
+
+        </div>
+      </div>
 
     </div>
-
   </div>
 
-  <div className="col-md-3">
 
-    <div className="form-group">
+  <div className='card bg-light medium-bottom-buffer '>
+    <div class="card-body">
 
-      <label for="contact3" id="contactLabel3" >May we contact this employer?</label>
+      <div className="row">
 
-      <select className="form-control" id="contact3" name="contact3" ref="contact3">
-        <option value="No">No</option>
-        <option value="Yes">Yes</option>
-      </select>
+        <div className="col-md-3">
+
+          <div className="form-group">
+
+            <label for="employerName3" id="employerNameLabel3">Employer Name:</label>
+
+            <input type="text" className="form-control" id="employerName3" ref="employerName3" required></input>
+
+          </div>
+
+        </div>
+
+        <div className="col-md-4">
+
+          <div className="form-group">
+
+            <label for="employerAddress3" id="employerAddressLabel3">Address:</label>
+
+            <input type="text" className="form-control" id="employerAddress3" ref="employerAddress3"></input>
+
+          </div>
+
+        </div>
+
+        <div className="col-md-2">
+
+          <div className="form-group">
+
+            <label for="employerPhone3" id="employerPhoneLabel3">Phone Number:</label>
+
+            <input type="text" className="form-control" id="employerPhone3" ref="employerPhone3" placeholder="##########"></input>
+
+          </div>
+
+        </div>
+
+        <div className="col-md-3">
+
+          <div className="form-group">
+
+            <label for="employerEmail3" id="employerEmailLabel3">Email:</label>
+
+            <input type="text" className="form-control" id="employerEmail3" ref="employerEmail3" placeholder="example@example.com"></input>
+
+          </div>
+
+        </div>
+
+      </div>
+
+      <div className="row">
+
+        <div className="col-md-2">
+
+          <div className="form-group">
+
+            <label for="supervisor3" id="supervisorLabel3">Last Supervisor:</label>
+
+            <input type="text" className="form-control" id="supervisor3" ref="supervisor3"></input>
+
+          </div>
+
+        </div>
+
+        <div className="col-md-2">
+
+          <div className="form-group">
+
+            <label for="title3" id="titleLabel3">Last Title:</label>
+
+            <input type="text" className="form-control" id="title3" ref="title3"></input>
+
+          </div>
+
+        </div>
+
+        <div className="col-md-2">
+
+          <div className="form-group">
+
+            <label for="startDate3" id="startDateLabel3">Start Date:</label>
+
+            <input type="text" className="form-control" id="startDate3" ref="startDate3" placeholder="mm/dd/yyyy"></input>
+
+          </div>
+
+        </div>
+
+        <div className="col-md-2">
+
+          <div className="form-group">
+
+            <label for="endDate3" id="endDateLabel3">End Date:</label>
+
+            <input type="text" className="form-control" id="endDate3" ref="endDate3" placeholder="mm/dd/yyyy"></input>
+
+          </div>
+
+        </div>
+
+        <div className="col-md-2">
+
+          <div className="form-group">
+
+            <label for="startSalary3" id="startSalaryLabel3">Starting Salary:</label>
+
+            <input type="text" className="form-control" id="startSalary3" ref="startSalary3"></input>
+
+          </div>
+
+        </div>
+
+        <div className="col-md-2">
+
+          <div className="form-group">
+
+            <label for="endSalary3" id="endSalaryLabel3">End Salary:</label>
+
+            <input type="text" className="form-control" id="endSalary3" ref="endSalary3"></input>
+
+          </div>
+
+        </div>
+
+
+
+      </div>
+
+      <div className="row">
+
+        <div className="col-md-8">
+
+          <div className="form-group">
+
+            <label for="leave3" id="leaveLabel3">Reason for leaving:</label>
+
+            <input type="text" className="form-control" id="leave3" ref="leave3"></input>
+
+          </div>
+
+        </div>
+
+        <div className="col-md-3">
+
+          <div className="form-group">
+
+            <label for="contact3" id="contactLabel3" >May we contact this employer?</label>
+
+            <select className="form-control" id="contact3" name="contact3" ref="contact3">
+              <option value="No">No</option>
+              <option value="Yes">Yes</option>
+            </select>
+
+          </div>
+
+        </div>
+
+      </div>
+
+      <div className="row">
+        <div className="col-md-12">
+          <div className="form-group">
+            <label for="duties3">List duties performed, skills used, and advancements and promotions earned:</label>
+            <textarea class="form-control" rows="5" id="duties3" ref="duties3"></textarea>
+          </div>
+
+        </div>
+      </div>
+
+
 
     </div>
-
   </div>
-
-</div>
-
-<div className="row">
-<div className="col-md-12">
-<div className="form-group">
-  <label for="duties3">List duties performed, skills used, and advancements and promotions earned:</label>
-  <textarea class="form-control" rows="5" id="duties3" ref="duties3"></textarea>
-</div>
-
-</div>
-</div>
-
-
-
-
 
 
 

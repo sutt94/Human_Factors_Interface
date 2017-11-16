@@ -3,7 +3,9 @@ import { Link } from 'react-router-dom';
 
 class JobRelated extends Component {
 
+
 processForm() {
+  localStorage.setItem("complete2", '0');
   document.body.scrollTop = document.documentElement.scrollTop = 0;
   var errorDetected = 0;
   var zipTest = /(^\d{5}$)|(^\d{5}-\d{4}$)/;
@@ -81,6 +83,19 @@ processForm() {
   localStorage.setItem("nights", nights);
   localStorage.setItem("dateAvailable", dateAvailable);
   localStorage.setItem("fired", fired);
+
+  if(all === false && monday === false && tuesday === false && wednesday === false && thursday === false && friday === false && saturday === false && sunday === false){
+    errorDetected = 1;
+    document.getElementById("availableDaysLabel").innerHTML = "Days Available for Work: *Required Information"
+
+    document.getElementById("availableDaysLabel").style.color = "red";
+  }else{
+
+    document.getElementById("availableDaysLabel").innerHTML = "Days Available for Work:"
+
+      document.getElementById("availableDaysLabel").style.color = "black";
+
+  }
 
   if (document.getElementById("emergencyfirstName").value == "" || document.getElementById("emergencyfirstName").value == " ") {
 
@@ -315,7 +330,10 @@ processForm() {
 
   if (errorDetected == 0){
 
-    document.getElementById("infoMessage").innerHTML = "Your information has been saved. Press continue below to continue to the next phase of the application " + "<i class='fa fa-check-circle-o' aria-hidden='true'></i>"
+    var complete = '1';
+    localStorage.setItem("complete2", complete);
+
+    document.getElementById("infoMessage").innerHTML = "Your information has been saved. Press continue to move on to the next phase of the application " + "<i class='fa fa-check-circle-o' aria-hidden='true'></i>"
 
       document.getElementById("infoMessage").style.color = "green";
 
@@ -341,6 +359,7 @@ processForm() {
 }
 
 processForm2() {
+  localStorage.setItem("complete2", '0');
   document.body.scrollTop = document.documentElement.scrollTop = 0;
   var errorDetected = 0;
   var continueLink = document.getElementById("continue");
@@ -396,6 +415,20 @@ processForm2() {
   localStorage.setItem("nights", nights);
   localStorage.setItem("dateAvailable", dateAvailable);
   localStorage.setItem("fired", fired);
+
+
+  if(all === false && monday === false && tuesday === false && wednesday === false && thursday === false && friday === false && saturday === false && sunday === false){
+    errorDetected = 1;
+    document.getElementById("availableDaysLabel").innerHTML = "Days Available for Work: *Required Information"
+
+    document.getElementById("availableDaysLabel").style.color = "red";
+  }else{
+
+    document.getElementById("availableDaysLabel").innerHTML = "Days Available for Work:"
+
+      document.getElementById("availableDaysLabel").style.color = "black";
+
+  }
 
   if (document.getElementById("emergencyfirstName").value == "" || document.getElementById("emergencyfirstName").value == " ") {
 
@@ -580,6 +613,9 @@ processForm2() {
 
   if (document.getElementById("dateAvailable").value == "" || !dateTest.test(document.getElementById("dateAvailable").value)) {
 
+    var complete = '1';
+    localStorage.setItem("complete2", complete);
+
     errorDetected = 1;
 
     document.getElementById("dateAvailableLabel").innerHTML = "Date Available: *Invalid Date"
@@ -604,7 +640,7 @@ processForm2() {
 
   if (errorDetected == 0){
 
-    document.getElementById("infoMessage").innerHTML = "Your information has been saved. Press continue below to continue to the next phase of the application " + "<i class='fa fa-check-circle-o' aria-hidden='true'></i>"
+    document.getElementById("infoMessage").innerHTML = "Your information has been saved. Press continue to move on to the next phase of the application " + "<i class='fa fa-check-circle-o' aria-hidden='true'></i>"
 
       document.getElementById("infoMessage").style.color = "green";
 
@@ -639,7 +675,9 @@ componentDidMount () {
   var insurance = document.getElementById("insurance");
   var willing = document.getElementById("willing");
 
-
+  if(localStorage.getItem("complete2") == '1') {
+  document.getElementById("continue").style.visibility = 'visible';
+    }
   if(localStorage.getItem("emergencyfirstName") !== null) {
     this.refs.emergencyfirstName.value = localStorage.getItem("emergencyfirstName");
     }
@@ -859,235 +897,240 @@ render() {
 
       </div>
 
+      <div className='card bg-light medium-bottom-buffer '>
+        <div class="card-body">
 
-      <div className="row medium-bottom-buffer">
+          <div className="row medium-bottom-buffer">
 
-        <div className="col-md-3">
+            <div className="col-md-3">
 
-          <div className="form-group">
+              <div className="form-group">
 
-            <label for="license" id="licenseLabel" >Do you have a driver's license?</label>
+                <label for="license" id="licenseLabel" >Do you have a driver's license?</label>
 
-            <select className="form-control" id="license" name="license" ref="license">
-              <option value="No">No</option>
-              <option value="Yes">Yes</option>
-            </select>
+                <select className="form-control" id="license" name="license" ref="license">
+                  <option value="No">No</option>
+                  <option value="Yes">Yes</option>
+                </select>
+
+              </div>
+
+            </div>
+
+            <div className="col-md-4">
+
+              <div className="form-group">
+
+                <label for="licenseNumber" id="licenseNumberLabel">Driver's License Number:</label>
+
+                <input type="text" className="form-control" id="licenseNumber" ref="licenseNumber" required></input>
+
+              </div>
+
+            </div>
+
+            <div className="col-md-2">
+
+              <div className="form-group">
+
+                <label for="issueState" id="issueStateLabel" >State Of Issue:</label>
+
+                <select className="form-control" id="issueState" name="issueState" ref="issueState">
+                  <option value="AK">Alaska</option>
+                  <option value="AL">Alabama</option>
+                  <option value="AR">Arkansas</option>
+                  <option value="AZ">Arizona</option>
+                  <option value="CA">California</option>
+                  <option value="CO">Colorado</option>
+                  <option value="CT">Connecticut</option>
+                  <option value="DC">District of Columbia</option>
+                  <option value="DE">Delaware</option>
+                  <option value="FL">Florida</option>
+                  <option value="GA">Georgia</option>
+                  <option value="HI">Hawaii</option>
+                  <option value="IA">Iowa</option>
+                  <option value="ID">Idaho</option>
+                  <option value="IL">Illinois</option>
+                  <option value="IN">Indiana</option>
+                  <option value="KS">Kansas</option>
+                  <option value="KY">Kentucky</option>
+                  <option value="LA">Louisiana</option>
+                  <option value="MA">Massachusetts</option>
+                  <option value="MD">Maryland</option>
+                  <option value="ME">Maine</option>
+                  <option value="MI">Michigan</option>
+                  <option value="MN">Minnesota</option>
+                  <option value="MO">Missouri</option>
+                  <option value="MS">Mississippi</option>
+                  <option value="MT">Montana</option>
+                  <option value="NC">North Carolina</option>
+                  <option value="ND">North Dakota</option>
+                  <option value="NE">Nebraska</option>
+                  <option value="NH">New Hampshire</option>
+                  <option value="NJ">New Jersey</option>
+                  <option value="NM">New Mexico</option>
+                  <option value="NV">Nevada</option>
+                  <option value="NY">New York</option>
+                  <option value="OH">Ohio</option>
+                  <option value="OK">Oklahoma</option>
+                  <option value="OR">Oregon</option>
+                  <option value="PA">Pennsylvania</option>
+                  <option value="PR">Puerto Rico</option>
+                  <option value="RI">Rhode Island</option>
+                  <option value="SC">South Carolina</option>
+                  <option value="SD">South Dakota</option>
+                  <option value="TN">Tennessee</option>
+                  <option value="TX">Texas</option>
+                  <option value="UT">Utah</option>
+                  <option value="VA">Virginia</option>
+                  <option value="VT">Vermont</option>
+                  <option value="WA">Washington</option>
+                  <option value="WI">Wisconsin</option>
+                  <option value="WV">West Virginia</option>
+                  <option value="WY">Wyoming</option>
+                </select>
+
+              </div>
+
+            </div>
+
+            <div className="col-md-3">
+
+              <div className="form-group">
+
+                <label for="expiration" id="expirationLabel">Expiration Date:</label>
+
+                <input type="text" className="form-control" id="expiration" ref="expiration" placeholder="mm/dd/yyyy" required></input>
+
+              </div>
+
+            </div>
+
+          </div>
+
+          <div className="row">
+
+            <div className="col-md-3">
+
+              <div className="form-group">
+
+                <label for="accidents" id="accidentsLabel" >How many traffic accidents have you had in the past 3 years?</label>
+
+                <select className="form-control" id="accidents" name="accidents" ref="accidents">
+                  <option value="0">0</option>
+                  <option value="1">1</option>
+                  <option value="2">2</option>
+                  <option value="3">3</option>
+                  <option value="More than 3">More than 3</option>
+                </select>
+
+              </div>
+
+            </div>
+
+            <div className="col-md-3">
+
+              <div className="form-group">
+
+                <label for="citations" id="citationsLabel" >How many traffic citations have you had in the past 3 years?</label>
+
+                <select className="form-control" id="citations" name="citations" ref="citations">
+                  <option value="0">0</option>
+                  <option value="1">1</option>
+                  <option value="2">2</option>
+                  <option value="3">3</option>
+                  <option value="More than 3">More than 3</option>
+                </select>
+
+              </div>
+
+            </div>
+
+            <div className="col-md-3">
+
+              <div className="form-group">
+
+                <label for="dui" id="duiLabel" >Have you ever been convicted of drinking and driving?</label>
+
+                <select className="form-control" id="dui" name="dui" ref="dui">
+                  <option value="No">No</option>
+                  <option value="Yes">Yes</option>
+                </select>
+
+              </div>
+
+            </div>
+
+            <div className="col-md-3">
+
+              <div className="form-group">
+
+                <label for="distracted" id="distractedLabel" >Have you ever been convicted of distracted driving?</label>
+
+                <select className="form-control" id="distracted" name="distracted" ref="distracted">
+                  <option value="No">No</option>
+                  <option value="Yes">Yes</option>
+                </select>
+
+              </div>
+
+            </div>
+
+
+
+
+          </div>
+
+          <div className="row">
+
+            <div className="col-md-3">
+
+              <div className="form-group">
+
+                <label for="vehicle" id="vehicleLabel" >Do you own a vehicle?</label>
+
+                <select className="form-control" id="vehicle" name="vehicle" ref="vehicle">
+                  <option value="No">No</option>
+                  <option value="Yes">Yes</option>
+                </select>
+
+              </div>
+
+            </div>
+
+            <div className="col-md-3">
+
+              <div className="form-group">
+
+                <label for="insurance" id="insuranceLabel" >Do you have car insurance?</label>
+
+                <select className="form-control" id="insurance" name="insurance" ref="insurance">
+                  <option value="No">No</option>
+                  <option value="Yes">Yes</option>
+                </select>
+
+              </div>
+
+            </div>
+
+            <div className="col-md-6">
+
+              <div className="form-group">
+
+                <label for="willing" id="willingLabel" >Are you willing to drive your own vehicle as part of your duties?</label>
+
+                <select className="form-control" id="willing" name="willing" ref="willing">
+                  <option value="No">No</option>
+                  <option value="Yes">Yes</option>
+                </select>
+
+              </div>
+
+            </div>
 
           </div>
 
         </div>
-
-        <div className="col-md-4">
-
-          <div className="form-group">
-
-            <label for="licenseNumber" id="licenseNumberLabel">Driver's License Number:</label>
-
-            <input type="text" className="form-control" id="licenseNumber" ref="licenseNumber" required></input>
-
-          </div>
-
-        </div>
-
-        <div className="col-md-2">
-
-          <div className="form-group">
-
-            <label for="issueState" id="issueStateLabel" >State Of Issue:</label>
-
-            <select className="form-control" id="issueState" name="issueState" ref="issueState">
-              <option value="AK">Alaska</option>
-              <option value="AL">Alabama</option>
-              <option value="AR">Arkansas</option>
-              <option value="AZ">Arizona</option>
-              <option value="CA">California</option>
-              <option value="CO">Colorado</option>
-              <option value="CT">Connecticut</option>
-              <option value="DC">District of Columbia</option>
-              <option value="DE">Delaware</option>
-              <option value="FL">Florida</option>
-              <option value="GA">Georgia</option>
-              <option value="HI">Hawaii</option>
-              <option value="IA">Iowa</option>
-              <option value="ID">Idaho</option>
-              <option value="IL">Illinois</option>
-              <option value="IN">Indiana</option>
-              <option value="KS">Kansas</option>
-              <option value="KY">Kentucky</option>
-              <option value="LA">Louisiana</option>
-              <option value="MA">Massachusetts</option>
-              <option value="MD">Maryland</option>
-              <option value="ME">Maine</option>
-              <option value="MI">Michigan</option>
-              <option value="MN">Minnesota</option>
-              <option value="MO">Missouri</option>
-              <option value="MS">Mississippi</option>
-              <option value="MT">Montana</option>
-              <option value="NC">North Carolina</option>
-              <option value="ND">North Dakota</option>
-              <option value="NE">Nebraska</option>
-              <option value="NH">New Hampshire</option>
-              <option value="NJ">New Jersey</option>
-              <option value="NM">New Mexico</option>
-              <option value="NV">Nevada</option>
-              <option value="NY">New York</option>
-              <option value="OH">Ohio</option>
-              <option value="OK">Oklahoma</option>
-              <option value="OR">Oregon</option>
-              <option value="PA">Pennsylvania</option>
-              <option value="PR">Puerto Rico</option>
-              <option value="RI">Rhode Island</option>
-              <option value="SC">South Carolina</option>
-              <option value="SD">South Dakota</option>
-              <option value="TN">Tennessee</option>
-              <option value="TX">Texas</option>
-              <option value="UT">Utah</option>
-              <option value="VA">Virginia</option>
-              <option value="VT">Vermont</option>
-              <option value="WA">Washington</option>
-              <option value="WI">Wisconsin</option>
-              <option value="WV">West Virginia</option>
-              <option value="WY">Wyoming</option>
-            </select>
-
-          </div>
-
-        </div>
-
-        <div className="col-md-3">
-
-          <div className="form-group">
-
-            <label for="expiration" id="expirationLabel">Expiration Date:</label>
-
-            <input type="text" className="form-control" id="expiration" ref="expiration" placeholder="mm/dd/yyyy" required></input>
-
-          </div>
-
-        </div>
-
-      </div>
-
-      <div className="row">
-
-        <div className="col-md-3">
-
-          <div className="form-group">
-
-            <label for="accidents" id="accidentsLabel" >How many traffic accidents have you had in the past 3 years?</label>
-
-            <select className="form-control" id="accidents" name="accidents" ref="accidents">
-              <option value="0">0</option>
-              <option value="1">1</option>
-              <option value="2">2</option>
-              <option value="3">3</option>
-              <option value="More than 3">More than 3</option>
-            </select>
-
-          </div>
-
-        </div>
-
-        <div className="col-md-3">
-
-          <div className="form-group">
-
-            <label for="citations" id="citationsLabel" >How many traffic citations have you had in the past 3 years?</label>
-
-            <select className="form-control" id="citations" name="citations" ref="citations">
-              <option value="0">0</option>
-              <option value="1">1</option>
-              <option value="2">2</option>
-              <option value="3">3</option>
-              <option value="More than 3">More than 3</option>
-            </select>
-
-          </div>
-
-        </div>
-
-        <div className="col-md-3">
-
-          <div className="form-group">
-
-            <label for="dui" id="duiLabel" >Have you ever been convicted of drinking and driving?</label>
-
-            <select className="form-control" id="dui" name="dui" ref="dui">
-              <option value="No">No</option>
-              <option value="Yes">Yes</option>
-            </select>
-
-          </div>
-
-        </div>
-
-        <div className="col-md-3">
-
-          <div className="form-group">
-
-            <label for="distracted" id="distractedLabel" >Have you ever been convicted of distracted driving?</label>
-
-            <select className="form-control" id="distracted" name="distracted" ref="distracted">
-              <option value="No">No</option>
-              <option value="Yes">Yes</option>
-            </select>
-
-          </div>
-
-        </div>
-
-
-
-
-      </div>
-
-      <div className="row">
-
-        <div className="col-md-3">
-
-          <div className="form-group">
-
-            <label for="vehicle" id="vehicleLabel" >Do you own a vehicle?</label>
-
-            <select className="form-control" id="vehicle" name="vehicle" ref="vehicle">
-              <option value="No">No</option>
-              <option value="Yes">Yes</option>
-            </select>
-
-          </div>
-
-        </div>
-
-        <div className="col-md-3">
-
-          <div className="form-group">
-
-            <label for="insurance" id="insuranceLabel" >Do you have car insurance?</label>
-
-            <select className="form-control" id="insurance" name="insurance" ref="insurance">
-              <option value="No">No</option>
-              <option value="Yes">Yes</option>
-            </select>
-
-          </div>
-
-        </div>
-
-        <div className="col-md-6">
-
-          <div className="form-group">
-
-            <label for="willing" id="willingLabel" >Are you willing to drive your own vehicle as part of your duties?</label>
-
-            <select className="form-control" id="willing" name="willing" ref="willing">
-              <option value="No">No</option>
-              <option value="Yes">Yes</option>
-            </select>
-
-          </div>
-
-        </div>
-
       </div>
 
       <div className="row medium-bottom-buffer">
@@ -1096,7 +1139,7 @@ render() {
         </div>
 
         <div className="col-md-6 text-center header-spacing">
-          <h3>Availability</h3><h6>(All Fields Required)</h6>
+          <h3>Schedule Availability</h3><h6>(All Fields Required)</h6>
         </div>
 
         <div className="col-md-3">
@@ -1104,138 +1147,142 @@ render() {
 
       </div>
 
+      <div className='card bg-light medium-bottom-buffer '>
+        <div class="card-body">
 
-      <div className="row smaller-bottom-buffer">
+          <div className="row smaller-bottom-buffer">
 
 
-        <div className="col-md-5">
+            <div className="col-md-5">
 
-          <label for="availableDays" id="availableDaysLabel" >Days Available for Work:</label>
-          <br/>
+              <label for="availableDays" id="availableDaysLabel" >Days Available for Work:</label>
+              <br/>
 
-          <div className="form-check-inline" id="availableDays">
-            <label className="form-check-label">
-              <input className="form-check-input" type="checkbox" id="all" ref="all" />
-              All
-            </label>
-          </div>
-          <div className="form-check-inline">
-            <label className="form-check-label">
-              <input className="form-check-input" type="checkbox" value="monday" id="monday" ref="monday" />
-              Monday
-            </label>
-          </div>
-          <div className="form-check-inline">
-            <label className="form-check-label">
-              <input className="form-check-input" type="checkbox" value="tuesday" id="tuesday" ref="tuesday" />
-              Tuesday
-            </label>
-          </div>
-          <div className="form-check-inline">
-            <label className="form-check-label">
-              <input className="form-check-input" type="checkbox" value="wednesday" id="wednesday" ref="wednesday" />
-              Wednesday
-            </label>
-          </div>
-          <div className="form-check-inline">
-            <label className="form-check-label">
-              <input className="form-check-input" type="checkbox" value="thursday"  id="thursday" ref="thursday"/>
-              Thursday
-            </label>
-          </div>
-          <div className="form-check-inline">
-            <label className="form-check-label">
-              <input className="form-check-input" type="checkbox" value="friday" id="friday" ref="friday" />
-              Friday
-            </label>
-          </div>
-          <div className="form-check-inline">
-            <label className="form-check-label">
-              <input className="form-check-input" type="checkbox" value="saturday" id="saturday" ref="saturday" />
-              Saturday
-            </label>
-          </div>
-          <div className="form-check-inline">
-            <label className="form-check-label">
-              <input className="form-check-input" type="checkbox" value="sunday" id="sunday" ref="sunday" />
-              Sunday
-            </label>
+              <div className="form-check-inline" id="availableDays">
+                <label className="form-check-label">
+                  <input className="form-check-input" type="checkbox" id="all" ref="all" />
+                  All
+                </label>
+              </div>
+              <div className="form-check-inline">
+                <label className="form-check-label">
+                  <input className="form-check-input" type="checkbox" value="monday" id="monday" ref="monday" />
+                  Monday
+                </label>
+              </div>
+              <div className="form-check-inline">
+                <label className="form-check-label">
+                  <input className="form-check-input" type="checkbox" value="tuesday" id="tuesday" ref="tuesday" />
+                  Tuesday
+                </label>
+              </div>
+              <div className="form-check-inline">
+                <label className="form-check-label">
+                  <input className="form-check-input" type="checkbox" value="wednesday" id="wednesday" ref="wednesday" />
+                  Wednesday
+                </label>
+              </div>
+              <div className="form-check-inline">
+                <label className="form-check-label">
+                  <input className="form-check-input" type="checkbox" value="thursday"  id="thursday" ref="thursday"/>
+                  Thursday
+                </label>
+              </div>
+              <div className="form-check-inline">
+                <label className="form-check-label">
+                  <input className="form-check-input" type="checkbox" value="friday" id="friday" ref="friday" />
+                  Friday
+                </label>
+              </div>
+              <div className="form-check-inline">
+                <label className="form-check-label">
+                  <input className="form-check-input" type="checkbox" value="saturday" id="saturday" ref="saturday" />
+                  Saturday
+                </label>
+              </div>
+              <div className="form-check-inline">
+                <label className="form-check-label">
+                  <input className="form-check-input" type="checkbox" value="sunday" id="sunday" ref="sunday" />
+                  Sunday
+                </label>
+              </div>
+
+            </div>
+
+            <div className="col-md-3">
+
+              <div className="form-group">
+
+                <label for="hoursAvailable" id="hoursAvailableLabel" >Weekly Hours Available</label>
+
+                <select className="form-control" id="hoursAvailable" name="hoursAvailable" ref="hoursAvailable">
+                  <option value="0-10">0-10</option>
+                  <option value="11-20">11-20</option>
+                  <option value="21-30">21-30</option>
+                  <option value="31-40">31-40</option>
+                  <option value="40+">40+</option>
+                </select>
+
+              </div>
+
+            </div>
+
+            <div className="col-md-4">
+
+              <div className="form-group">
+
+                <label for="nights" id="nightsLabel" >Can you work nights?</label>
+
+                <select className="form-control" id="nights" name="nights" ref="nights">
+                  <option value="No">No</option>
+                  <option value="Yes">Yes</option>
+                </select>
+
+              </div>
+
+            </div>
+
+
+
+
+
+
           </div>
 
+          <div className="row">
+
+            <div className="col-md-4">
+
+              <div className="form-group">
+
+                <label for="dateAvailable" id="dateAvailableLabel">Date Available for Work:</label>
+
+                <input type="text" className="form-control" id="dateAvailable" ref="dateAvailable" placeholder="mm/dd/yyyy" required></input>
+
+              </div>
+
+
+            </div>
+
+            <div className="col-md-3 offset-md-1">
+
+              <div className="form-group">
+
+                <label for="fired" id="firedLabel" >Have you been fired from a job?</label>
+
+                <select className="form-control" id="fired" name="fired" ref="fired">
+                  <option value="No">No</option>
+                  <option value="Yes">Yes</option>
+                </select>
+
+              </div>
+
+            </div>
+
+
+
+          </div>
         </div>
-
-        <div className="col-md-3">
-
-          <div className="form-group">
-
-            <label for="hoursAvailable" id="hoursAvailableLabel" >Weekly Hours Available</label>
-
-            <select className="form-control" id="hoursAvailable" name="hoursAvailable" ref="hoursAvailable">
-              <option value="0-10">0-10</option>
-              <option value="11-20">11-20</option>
-              <option value="21-30">21-30</option>
-              <option value="31-40">31-40</option>
-              <option value="40+">40+</option>
-            </select>
-
-          </div>
-
-        </div>
-
-        <div className="col-md-4">
-
-          <div className="form-group">
-
-            <label for="nights" id="nightsLabel" >Can you work nights?</label>
-
-            <select className="form-control" id="nights" name="nights" ref="nights">
-              <option value="No">No</option>
-              <option value="Yes">Yes</option>
-            </select>
-
-          </div>
-
-        </div>
-
-
-
-
-
-
-      </div>
-
-      <div className="row">
-
-        <div className="col-md-4">
-
-          <div className="form-group">
-
-            <label for="dateAvailable" id="dateAvailableLabel">Date Available for Work:</label>
-
-            <input type="text" className="form-control" id="dateAvailable" ref="dateAvailable" placeholder="mm/dd/yyyy" required></input>
-
-          </div>
-
-
-        </div>
-
-        <div className="col-md-3 offset-md-1">
-
-          <div className="form-group">
-
-            <label for="fired" id="firedLabel" >Have you been fired from a job?</label>
-
-            <select className="form-control" id="fired" name="fired" ref="fired">
-              <option value="No">No</option>
-              <option value="Yes">Yes</option>
-            </select>
-
-          </div>
-
-        </div>
-
-
-
       </div>
 
       <div className="row header-spacing">
@@ -1244,7 +1291,7 @@ render() {
         </div>
 
         <div className="col-md-6 text-center">
-          <h3>Emergency Contact Information</h3><h6>(All Fields Required)</h6>
+          <h3>Emergency Contact Information</h3><h6>Who should we contact in case of an emergency?(All Fields Required)</h6>
         </div>
 
         <div className="col-md-3">
@@ -1252,203 +1299,209 @@ render() {
 
       </div>
 
-
-      <div className="row top-buffer medium-bottom-buffer">
-
-        <div className="col-md-4">
-
-          <div className="form-group">
-
-            <label for="emergencyfirstName" id="emergencyfirstNameLabel">First Name:</label>
-
-            <input type="text" className="form-control" id="emergencyfirstName" ref="emergencyfirstName" required></input>
-
-          </div>
-
-        </div>
-
-        <div className="col-md-4">
-
-          <div className="form-group">
-
-            <label for="emergencymiddleName" id="emergencymiddleNameLabel">Middle Name:</label>
-
-            <input type="text" className="form-control" id="emergencymiddleName" ref="emergencymiddleName"></input>
-
-          </div>
-
-        </div>
-
-        <div className="col-md-4">
-
-          <div className="form-group">
-
-            <label for="emergencylastName" id="emergencylastNameLabel">Last Name:</label>
-
-            <input type="text" className="form-control" id="emergencylastName" ref="emergencylastName"></input>
-
-          </div>
-
-        </div>
-
-      </div>
+      <div className='card bg-light medium-bottom-buffer '>
+        <div class="card-body">
 
 
-      <div className="row medium-bottom-buffer">
+          <div className="row top-buffer medium-bottom-buffer">
 
-        <div className="col-md-6">
+            <div className="col-md-4">
 
-          <div className="form-group">
+              <div className="form-group">
 
-            <label for="emergencystreet" id="emergencystreetLabel">Street:</label>
+                <label for="emergencyfirstName" id="emergencyfirstNameLabel">First Name:</label>
 
-            <input type="text" className="form-control" id="emergencystreet" ref="emergencystreet"></input>
+                <input type="text" className="form-control" id="emergencyfirstName" ref="emergencyfirstName" required></input>
+
+              </div>
+
+            </div>
+
+            <div className="col-md-4">
+
+              <div className="form-group">
+
+                <label for="emergencymiddleName" id="emergencymiddleNameLabel">Middle Name:</label>
+
+                <input type="text" className="form-control" id="emergencymiddleName" ref="emergencymiddleName"></input>
+
+              </div>
+
+            </div>
+
+            <div className="col-md-4">
+
+              <div className="form-group">
+
+                <label for="emergencylastName" id="emergencylastNameLabel">Last Name:</label>
+
+                <input type="text" className="form-control" id="emergencylastName" ref="emergencylastName"></input>
+
+              </div>
+
+            </div>
 
           </div>
 
 
-        </div>
+          <div className="row medium-bottom-buffer">
 
-        <div className="col-md-3">
+            <div className="col-md-6">
 
-          <div className="form-group">
+              <div className="form-group">
 
-            <label for="emergencycity" id="emergencycityLabel">City:</label>
+                <label for="emergencystreet" id="emergencystreetLabel">Street:</label>
 
-            <input type="text" className="form-control" id="emergencycity" ref="emergencycity"></input>
+                <input type="text" className="form-control" id="emergencystreet" ref="emergencystreet"></input>
 
-          </div>
-
-
-        </div>
-
-        <div className="col-md-3">
-
-          <div className="form-group">
-
-            <label for="emergencystate" id="emergencystateLabel" >State:</label>
-
-            <select className="form-control" id="emergencystate" name="emergencystate" ref="emergencystate">
-              <option value="AK">Alaska</option>
-              <option value="AL">Alabama</option>
-              <option value="AR">Arkansas</option>
-              <option value="AZ">Arizona</option>
-              <option value="CA">California</option>
-              <option value="CO">Colorado</option>
-              <option value="CT">Connecticut</option>
-              <option value="DC">District of Columbia</option>
-              <option value="DE">Delaware</option>
-              <option value="FL">Florida</option>
-              <option value="GA">Georgia</option>
-              <option value="HI">Hawaii</option>
-              <option value="IA">Iowa</option>
-              <option value="ID">Idaho</option>
-              <option value="IL">Illinois</option>
-              <option value="IN">Indiana</option>
-              <option value="KS">Kansas</option>
-              <option value="KY">Kentucky</option>
-              <option value="LA">Louisiana</option>
-              <option value="MA">Massachusetts</option>
-              <option value="MD">Maryland</option>
-              <option value="ME">Maine</option>
-              <option value="MI">Michigan</option>
-              <option value="MN">Minnesota</option>
-              <option value="MO">Missouri</option>
-              <option value="MS">Mississippi</option>
-              <option value="MT">Montana</option>
-              <option value="NC">North Carolina</option>
-              <option value="ND">North Dakota</option>
-              <option value="NE">Nebraska</option>
-              <option value="NH">New Hampshire</option>
-              <option value="NJ">New Jersey</option>
-              <option value="NM">New Mexico</option>
-              <option value="NV">Nevada</option>
-              <option value="NY">New York</option>
-              <option value="OH">Ohio</option>
-              <option value="OK">Oklahoma</option>
-              <option value="OR">Oregon</option>
-              <option value="PA">Pennsylvania</option>
-              <option value="PR">Puerto Rico</option>
-              <option value="RI">Rhode Island</option>
-              <option value="SC">South Carolina</option>
-              <option value="SD">South Dakota</option>
-              <option value="TN">Tennessee</option>
-              <option value="TX">Texas</option>
-              <option value="UT">Utah</option>
-              <option value="VA">Virginia</option>
-              <option value="VT">Vermont</option>
-              <option value="WA">Washington</option>
-              <option value="WI">Wisconsin</option>
-              <option value="WV">West Virginia</option>
-              <option value="WY">Wyoming</option>
-            </select>
-
-          </div>
-
-        </div>
+              </div>
 
 
-      </div>
+            </div>
+
+            <div className="col-md-3">
+
+              <div className="form-group">
+
+                <label for="emergencycity" id="emergencycityLabel">City:</label>
+
+                <input type="text" className="form-control" id="emergencycity" ref="emergencycity"></input>
+
+              </div>
 
 
+            </div>
 
-      <div className="row medium-bottom-buffer">
+            <div className="col-md-3">
 
-        <div className="col-md-3">
+              <div className="form-group">
 
-          <div className="form-group">
+                <label for="emergencystate" id="emergencystateLabel" >State:</label>
 
-            <label for="emergencyzip" id="emergencyzipLabel">ZIP Code (5 Digits)</label>
+                <select className="form-control" id="emergencystate" name="emergencystate" ref="emergencystate">
+                  <option value="AK">Alaska</option>
+                  <option value="AL">Alabama</option>
+                  <option value="AR">Arkansas</option>
+                  <option value="AZ">Arizona</option>
+                  <option value="CA">California</option>
+                  <option value="CO">Colorado</option>
+                  <option value="CT">Connecticut</option>
+                  <option value="DC">District of Columbia</option>
+                  <option value="DE">Delaware</option>
+                  <option value="FL">Florida</option>
+                  <option value="GA">Georgia</option>
+                  <option value="HI">Hawaii</option>
+                  <option value="IA">Iowa</option>
+                  <option value="ID">Idaho</option>
+                  <option value="IL">Illinois</option>
+                  <option value="IN">Indiana</option>
+                  <option value="KS">Kansas</option>
+                  <option value="KY">Kentucky</option>
+                  <option value="LA">Louisiana</option>
+                  <option value="MA">Massachusetts</option>
+                  <option value="MD">Maryland</option>
+                  <option value="ME">Maine</option>
+                  <option value="MI">Michigan</option>
+                  <option value="MN">Minnesota</option>
+                  <option value="MO">Missouri</option>
+                  <option value="MS">Mississippi</option>
+                  <option value="MT">Montana</option>
+                  <option value="NC">North Carolina</option>
+                  <option value="ND">North Dakota</option>
+                  <option value="NE">Nebraska</option>
+                  <option value="NH">New Hampshire</option>
+                  <option value="NJ">New Jersey</option>
+                  <option value="NM">New Mexico</option>
+                  <option value="NV">Nevada</option>
+                  <option value="NY">New York</option>
+                  <option value="OH">Ohio</option>
+                  <option value="OK">Oklahoma</option>
+                  <option value="OR">Oregon</option>
+                  <option value="PA">Pennsylvania</option>
+                  <option value="PR">Puerto Rico</option>
+                  <option value="RI">Rhode Island</option>
+                  <option value="SC">South Carolina</option>
+                  <option value="SD">South Dakota</option>
+                  <option value="TN">Tennessee</option>
+                  <option value="TX">Texas</option>
+                  <option value="UT">Utah</option>
+                  <option value="VA">Virginia</option>
+                  <option value="VT">Vermont</option>
+                  <option value="WA">Washington</option>
+                  <option value="WI">Wisconsin</option>
+                  <option value="WV">West Virginia</option>
+                  <option value="WY">Wyoming</option>
+                </select>
 
-            <input type="text" className="form-control" id="emergencyzip" ref="emergencyzip" pattern="[0-9]{5}" title="Five digit zip code" placeholder="#####" />
+              </div>
 
-          </div>
-
-        </div>
-
-
-        <div className="col-md-3">
-
-          <div className="form-group">
-
-
-            <label className="control-label" for="emergencyrelationship" id="emergencyrelationshipLabel">Relationship:</label>
-
-            <input type="email" class="form-control" id="emergencyrelationship" ref="emergencyrelationship"></input>
+            </div>
 
 
           </div>
 
-        </div>
-
-        <div className="col-md-3">
-
-          <div className="form-group">
 
 
-            <label className="control-label" for="emergencyphone" id="emergencyphoneLabel">Phone Number:</label>
+          <div className="row medium-bottom-buffer">
 
-            <input type="email" class="form-control" id="emergencyphone" ref="emergencyphone" placeholder="##########" maxlength="10"></input>
+            <div className="col-md-3">
 
+              <div className="form-group">
+
+                <label for="emergencyzip" id="emergencyzipLabel">ZIP Code (5 Digits)</label>
+
+                <input type="text" className="form-control" id="emergencyzip" ref="emergencyzip" pattern="[0-9]{5}" title="Five digit zip code" placeholder="#####" />
+
+              </div>
+
+            </div>
+
+
+            <div className="col-md-3">
+
+              <div className="form-group">
+
+
+                <label className="control-label" for="emergencyrelationship" id="emergencyrelationshipLabel">Relationship:</label>
+
+                <input type="email" class="form-control" id="emergencyrelationship" ref="emergencyrelationship"></input>
+
+
+              </div>
+
+            </div>
+
+            <div className="col-md-3">
+
+              <div className="form-group">
+
+
+                <label className="control-label" for="emergencyphone" id="emergencyphoneLabel">Phone Number:</label>
+
+                <input type="email" class="form-control" id="emergencyphone" ref="emergencyphone" placeholder="##########" maxlength="10"></input>
+
+
+              </div>
+
+            </div>
+
+            <div className="col-md-3">
+
+              <div className="form-group">
+
+
+                <label className="control-label" for="emergencyemail" id="emergencyemailLabel">Email:</label>
+
+                <input type="email" class="form-control" id="emergencyemail" ref="emergencyemail" placeholder="example@example.com"></input>
+
+
+              </div>
+
+            </div>
 
           </div>
 
         </div>
-
-        <div className="col-md-3">
-
-          <div className="form-group">
-
-
-            <label className="control-label" for="emergencyemail" id="emergencyemailLabel">Email:</label>
-
-            <input type="email" class="form-control" id="emergencyemail" ref="emergencyemail" placeholder="example@example.com"></input>
-
-
-          </div>
-
-        </div>
-
       </div>
 
 
@@ -1502,13 +1555,15 @@ else{
         </div>
 
         <div className="col-md-6 text-center small-top-buffer smaller-bottom-buffer">
-          <h3>Availability</h3><h6>(All Fields Required)</h6>
+          <h3>Schedule Availability</h3><h6>(All Fields Required)</h6>
         </div>
 
         <div className="col-md-3">
         </div>
 
       </div>
+
+
 
       <div className="row slight-smaller-bottom-buffer">
 
@@ -1527,145 +1582,151 @@ else{
 
         <div className="col-md-3 text-right" id="continue" style={{visibility: "hidden"}}>
 
-          <Link to='/CriminalHistory' className="btn btn-success">Continue</Link>
+          <Link to='/CriminalHistory' className="btn btn-success" onClick={this.formComplete}>Continue</Link>
 
         </div>
 
 
       </div>
 
+      <div className='card bg-light medium-bottom-buffer '>
+        <div class="card-body">
 
-      <div className="row smaller-bottom-buffer">
+
+          <div className="row smaller-bottom-buffer">
 
 
-        <div className="col-md-5">
+            <div className="col-md-5">
 
-          <label for="availableDays" id="availableDaysLabel" >Days Available for Work:</label>
-          <br/>
+              <label for="availableDays" id="availableDaysLabel" >Days Available for Work:</label>
+              <br/>
 
-          <div className="form-check-inline" id="availableDays">
-            <label className="form-check-label">
-              <input className="form-check-input" type="checkbox" id="all" ref="all" />
-              All
-            </label>
+              <div className="form-check-inline" id="availableDays">
+                <label className="form-check-label">
+                  <input className="form-check-input" type="checkbox" id="all" ref="all" />
+                  All
+                </label>
+              </div>
+              <div className="form-check-inline">
+                <label className="form-check-label">
+                  <input className="form-check-input" type="checkbox" value="monday" id="monday" ref="monday" />
+                  Monday
+                </label>
+              </div>
+              <div className="form-check-inline">
+                <label className="form-check-label">
+                  <input className="form-check-input" type="checkbox" value="tuesday" id="tuesday" ref="tuesday" />
+                  Tuesday
+                </label>
+              </div>
+              <div className="form-check-inline">
+                <label className="form-check-label">
+                  <input className="form-check-input" type="checkbox" value="wednesday" id="wednesday" ref="wednesday" />
+                  Wednesday
+                </label>
+              </div>
+              <div className="form-check-inline">
+                <label className="form-check-label">
+                  <input className="form-check-input" type="checkbox" value="thursday"  id="thursday" ref="thursday"/>
+                  Thursday
+                </label>
+              </div>
+              <div className="form-check-inline">
+                <label className="form-check-label">
+                  <input className="form-check-input" type="checkbox" value="friday" id="friday" ref="friday" />
+                  Friday
+                </label>
+              </div>
+              <div className="form-check-inline">
+                <label className="form-check-label">
+                  <input className="form-check-input" type="checkbox" value="saturday" id="saturday" ref="saturday" />
+                  Saturday
+                </label>
+              </div>
+              <div className="form-check-inline">
+                <label className="form-check-label">
+                  <input className="form-check-input" type="checkbox" value="sunday" id="sunday" ref="sunday" />
+                  Sunday
+                </label>
+              </div>
+
+            </div>
+
+            <div className="col-md-3">
+
+              <div className="form-group">
+
+                <label for="hoursAvailable" id="hoursAvailableLabel" >Weekly Hours Available</label>
+
+                <select className="form-control" id="hoursAvailable" name="hoursAvailable" ref="hoursAvailable">
+                  <option value="0-10">0-10</option>
+                  <option value="11-20">11-20</option>
+                  <option value="21-30">21-30</option>
+                  <option value="31-40">31-40</option>
+                  <option value="40+">40+</option>
+                </select>
+
+              </div>
+
+            </div>
+
+            <div className="col-md-4">
+
+              <div className="form-group">
+
+                <label for="nights" id="nightsLabel" >Can you work nights?</label>
+
+                <select className="form-control" id="nights" name="nights" ref="nights">
+                  <option value="No">No</option>
+                  <option value="Yes">Yes</option>
+                </select>
+
+              </div>
+
+            </div>
+
+
+
+
+
+
           </div>
-          <div className="form-check-inline">
-            <label className="form-check-label">
-              <input className="form-check-input" type="checkbox" value="monday" id="monday" ref="monday" />
-              Monday
-            </label>
-          </div>
-          <div className="form-check-inline">
-            <label className="form-check-label">
-              <input className="form-check-input" type="checkbox" value="tuesday" id="tuesday" ref="tuesday" />
-              Tuesday
-            </label>
-          </div>
-          <div className="form-check-inline">
-            <label className="form-check-label">
-              <input className="form-check-input" type="checkbox" value="wednesday" id="wednesday" ref="wednesday" />
-              Wednesday
-            </label>
-          </div>
-          <div className="form-check-inline">
-            <label className="form-check-label">
-              <input className="form-check-input" type="checkbox" value="thursday"  id="thursday" ref="thursday"/>
-              Thursday
-            </label>
-          </div>
-          <div className="form-check-inline">
-            <label className="form-check-label">
-              <input className="form-check-input" type="checkbox" value="friday" id="friday" ref="friday" />
-              Friday
-            </label>
-          </div>
-          <div className="form-check-inline">
-            <label className="form-check-label">
-              <input className="form-check-input" type="checkbox" value="saturday" id="saturday" ref="saturday" />
-              Saturday
-            </label>
-          </div>
-          <div className="form-check-inline">
-            <label className="form-check-label">
-              <input className="form-check-input" type="checkbox" value="sunday" id="sunday" ref="sunday" />
-              Sunday
-            </label>
+
+          <div className="row">
+
+            <div className="col-md-4">
+
+              <div className="form-group">
+
+                <label for="dateAvailable" id="dateAvailableLabel">Date Available for Work:</label>
+
+                <input type="text" className="form-control" id="dateAvailable" ref="dateAvailable" placeholder="mm/dd/yyyy" required></input>
+
+              </div>
+
+
+            </div>
+
+            <div className="col-md-3 offset-md-1">
+
+              <div className="form-group">
+
+                <label for="fired" id="firedLabel" >Have you been fired from a job?</label>
+
+                <select className="form-control" id="fired" name="fired" ref="fired">
+                  <option value="No">No</option>
+                  <option value="Yes">Yes</option>
+                </select>
+
+              </div>
+
+            </div>
+
+
+
           </div>
 
         </div>
-
-        <div className="col-md-3">
-
-          <div className="form-group">
-
-            <label for="hoursAvailable" id="hoursAvailableLabel" >Weekly Hours Available</label>
-
-            <select className="form-control" id="hoursAvailable" name="hoursAvailable" ref="hoursAvailable">
-              <option value="0-10">0-10</option>
-              <option value="11-20">11-20</option>
-              <option value="21-30">21-30</option>
-              <option value="31-40">31-40</option>
-              <option value="40+">40+</option>
-            </select>
-
-          </div>
-
-        </div>
-
-        <div className="col-md-4">
-
-          <div className="form-group">
-
-            <label for="nights" id="nightsLabel" >Can you work nights?</label>
-
-            <select className="form-control" id="nights" name="nights" ref="nights">
-              <option value="No">No</option>
-              <option value="Yes">Yes</option>
-            </select>
-
-          </div>
-
-        </div>
-
-
-
-
-
-
-      </div>
-
-      <div className="row">
-
-        <div className="col-md-4">
-
-          <div className="form-group">
-
-            <label for="dateAvailable" id="dateAvailableLabel">Date Available for Work:</label>
-
-            <input type="text" className="form-control" id="dateAvailable" ref="dateAvailable" placeholder="mm/dd/yyyy" required></input>
-
-          </div>
-
-
-        </div>
-
-        <div className="col-md-3 offset-md-1">
-
-          <div className="form-group">
-
-            <label for="fired" id="firedLabel" >Have you been fired from a job?</label>
-
-            <select className="form-control" id="fired" name="fired" ref="fired">
-              <option value="No">No</option>
-              <option value="Yes">Yes</option>
-            </select>
-
-          </div>
-
-        </div>
-
-
-
       </div>
 
       <div className="row">
@@ -1674,7 +1735,7 @@ else{
         </div>
 
         <div className="col-md-6 text-center header-spacing">
-          <h3>Emergency Contact Information</h3><h6>(All Fields Required)</h6>
+          <h3>Emergency Contact Information</h3><h6>Who should we contact in case of an emergency?(All Fields Required)</h6>
         </div>
 
         <div className="col-md-3">
@@ -1682,203 +1743,209 @@ else{
 
       </div>
 
-
-      <div className="row top-buffer medium-bottom-buffer">
-
-        <div className="col-md-4">
-
-          <div className="form-group">
-
-            <label for="emergencyfirstName" id="emergencyfirstNameLabel">First Name:</label>
-
-            <input type="text" className="form-control" id="emergencyfirstName" ref="emergencyfirstName" required></input>
-
-          </div>
-
-        </div>
-
-        <div className="col-md-4">
-
-          <div className="form-group">
-
-            <label for="emergencymiddleName" id="emergencymiddleNameLabel">Middle Name:</label>
-
-            <input type="text" className="form-control" id="emergencymiddleName" ref="emergencymiddleName"></input>
-
-          </div>
-
-        </div>
-
-        <div className="col-md-4">
-
-          <div className="form-group">
-
-            <label for="emergencylastName" id="emergencylastNameLabel">Last Name:</label>
-
-            <input type="text" className="form-control" id="emergencylastName" ref="emergencylastName"></input>
-
-          </div>
-
-        </div>
-
-      </div>
+      <div className='card bg-light medium-bottom-buffer '>
+        <div class="card-body">
 
 
-      <div className="row medium-bottom-buffer">
+          <div className="row top-buffer medium-bottom-buffer">
 
-        <div className="col-md-6">
+            <div className="col-md-4">
 
-          <div className="form-group">
+              <div className="form-group">
 
-            <label for="emergencystreet" id="emergencystreetLabel">Street:</label>
+                <label for="emergencyfirstName" id="emergencyfirstNameLabel">First Name:</label>
 
-            <input type="text" className="form-control" id="emergencystreet" ref="emergencystreet"></input>
+                <input type="text" className="form-control" id="emergencyfirstName" ref="emergencyfirstName" required></input>
+
+              </div>
+
+            </div>
+
+            <div className="col-md-4">
+
+              <div className="form-group">
+
+                <label for="emergencymiddleName" id="emergencymiddleNameLabel">Middle Name:</label>
+
+                <input type="text" className="form-control" id="emergencymiddleName" ref="emergencymiddleName"></input>
+
+              </div>
+
+            </div>
+
+            <div className="col-md-4">
+
+              <div className="form-group">
+
+                <label for="emergencylastName" id="emergencylastNameLabel">Last Name:</label>
+
+                <input type="text" className="form-control" id="emergencylastName" ref="emergencylastName"></input>
+
+              </div>
+
+            </div>
 
           </div>
 
 
-        </div>
+          <div className="row medium-bottom-buffer">
 
-        <div className="col-md-3">
+            <div className="col-md-6">
 
-          <div className="form-group">
+              <div className="form-group">
 
-            <label for="emergencycity" id="emergencycityLabel">City:</label>
+                <label for="emergencystreet" id="emergencystreetLabel">Street:</label>
 
-            <input type="text" className="form-control" id="emergencycity" ref="emergencycity"></input>
+                <input type="text" className="form-control" id="emergencystreet" ref="emergencystreet"></input>
 
-          </div>
-
-
-        </div>
-
-        <div className="col-md-3">
-
-          <div className="form-group">
-
-            <label for="emergencystate" id="emergencystateLabel" >State:</label>
-
-            <select className="form-control" id="emergencystate" name="emergencystate" ref="emergencystate">
-              <option value="AK">Alaska</option>
-              <option value="AL">Alabama</option>
-              <option value="AR">Arkansas</option>
-              <option value="AZ">Arizona</option>
-              <option value="CA">California</option>
-              <option value="CO">Colorado</option>
-              <option value="CT">Connecticut</option>
-              <option value="DC">District of Columbia</option>
-              <option value="DE">Delaware</option>
-              <option value="FL">Florida</option>
-              <option value="GA">Georgia</option>
-              <option value="HI">Hawaii</option>
-              <option value="IA">Iowa</option>
-              <option value="ID">Idaho</option>
-              <option value="IL">Illinois</option>
-              <option value="IN">Indiana</option>
-              <option value="KS">Kansas</option>
-              <option value="KY">Kentucky</option>
-              <option value="LA">Louisiana</option>
-              <option value="MA">Massachusetts</option>
-              <option value="MD">Maryland</option>
-              <option value="ME">Maine</option>
-              <option value="MI">Michigan</option>
-              <option value="MN">Minnesota</option>
-              <option value="MO">Missouri</option>
-              <option value="MS">Mississippi</option>
-              <option value="MT">Montana</option>
-              <option value="NC">North Carolina</option>
-              <option value="ND">North Dakota</option>
-              <option value="NE">Nebraska</option>
-              <option value="NH">New Hampshire</option>
-              <option value="NJ">New Jersey</option>
-              <option value="NM">New Mexico</option>
-              <option value="NV">Nevada</option>
-              <option value="NY">New York</option>
-              <option value="OH">Ohio</option>
-              <option value="OK">Oklahoma</option>
-              <option value="OR">Oregon</option>
-              <option value="PA">Pennsylvania</option>
-              <option value="PR">Puerto Rico</option>
-              <option value="RI">Rhode Island</option>
-              <option value="SC">South Carolina</option>
-              <option value="SD">South Dakota</option>
-              <option value="TN">Tennessee</option>
-              <option value="TX">Texas</option>
-              <option value="UT">Utah</option>
-              <option value="VA">Virginia</option>
-              <option value="VT">Vermont</option>
-              <option value="WA">Washington</option>
-              <option value="WI">Wisconsin</option>
-              <option value="WV">West Virginia</option>
-              <option value="WY">Wyoming</option>
-            </select>
-
-          </div>
-
-        </div>
+              </div>
 
 
-      </div>
+            </div>
+
+            <div className="col-md-3">
+
+              <div className="form-group">
+
+                <label for="emergencycity" id="emergencycityLabel">City:</label>
+
+                <input type="text" className="form-control" id="emergencycity" ref="emergencycity"></input>
+
+              </div>
 
 
+            </div>
 
-      <div className="row medium-bottom-buffer">
+            <div className="col-md-3">
 
-        <div className="col-md-3">
+              <div className="form-group">
 
-          <div className="form-group">
+                <label for="emergencystate" id="emergencystateLabel" >State:</label>
 
-            <label for="emergencyzip" id="emergencyzipLabel">ZIP Code (5 Digits)</label>
+                <select className="form-control" id="emergencystate" name="emergencystate" ref="emergencystate">
+                  <option value="AK">Alaska</option>
+                  <option value="AL">Alabama</option>
+                  <option value="AR">Arkansas</option>
+                  <option value="AZ">Arizona</option>
+                  <option value="CA">California</option>
+                  <option value="CO">Colorado</option>
+                  <option value="CT">Connecticut</option>
+                  <option value="DC">District of Columbia</option>
+                  <option value="DE">Delaware</option>
+                  <option value="FL">Florida</option>
+                  <option value="GA">Georgia</option>
+                  <option value="HI">Hawaii</option>
+                  <option value="IA">Iowa</option>
+                  <option value="ID">Idaho</option>
+                  <option value="IL">Illinois</option>
+                  <option value="IN">Indiana</option>
+                  <option value="KS">Kansas</option>
+                  <option value="KY">Kentucky</option>
+                  <option value="LA">Louisiana</option>
+                  <option value="MA">Massachusetts</option>
+                  <option value="MD">Maryland</option>
+                  <option value="ME">Maine</option>
+                  <option value="MI">Michigan</option>
+                  <option value="MN">Minnesota</option>
+                  <option value="MO">Missouri</option>
+                  <option value="MS">Mississippi</option>
+                  <option value="MT">Montana</option>
+                  <option value="NC">North Carolina</option>
+                  <option value="ND">North Dakota</option>
+                  <option value="NE">Nebraska</option>
+                  <option value="NH">New Hampshire</option>
+                  <option value="NJ">New Jersey</option>
+                  <option value="NM">New Mexico</option>
+                  <option value="NV">Nevada</option>
+                  <option value="NY">New York</option>
+                  <option value="OH">Ohio</option>
+                  <option value="OK">Oklahoma</option>
+                  <option value="OR">Oregon</option>
+                  <option value="PA">Pennsylvania</option>
+                  <option value="PR">Puerto Rico</option>
+                  <option value="RI">Rhode Island</option>
+                  <option value="SC">South Carolina</option>
+                  <option value="SD">South Dakota</option>
+                  <option value="TN">Tennessee</option>
+                  <option value="TX">Texas</option>
+                  <option value="UT">Utah</option>
+                  <option value="VA">Virginia</option>
+                  <option value="VT">Vermont</option>
+                  <option value="WA">Washington</option>
+                  <option value="WI">Wisconsin</option>
+                  <option value="WV">West Virginia</option>
+                  <option value="WY">Wyoming</option>
+                </select>
 
-            <input type="text" className="form-control" id="emergencyzip" ref="emergencyzip" pattern="[0-9]{5}" title="Five digit zip code" placeholder="#####" />
+              </div>
 
-          </div>
-
-        </div>
-
-
-        <div className="col-md-3">
-
-          <div className="form-group">
-
-
-            <label className="control-label" for="emergencyrelationship" id="emergencyrelationshipLabel">Relationship:</label>
-
-            <input type="email" class="form-control" id="emergencyrelationship" ref="emergencyrelationship"></input>
+            </div>
 
 
           </div>
 
-        </div>
-
-        <div className="col-md-3">
-
-          <div className="form-group">
 
 
-            <label className="control-label" for="emergencyphone" id="emergencyphoneLabel">Phone Number:</label>
+          <div className="row medium-bottom-buffer">
 
-            <input type="email" class="form-control" id="emergencyphone" ref="emergencyphone" placeholder="##########" maxlength="10"></input>
+            <div className="col-md-3">
 
+              <div className="form-group">
+
+                <label for="emergencyzip" id="emergencyzipLabel">ZIP Code (5 Digits)</label>
+
+                <input type="text" className="form-control" id="emergencyzip" ref="emergencyzip" pattern="[0-9]{5}" title="Five digit zip code" placeholder="#####" />
+
+              </div>
+
+            </div>
+
+
+            <div className="col-md-3">
+
+              <div className="form-group">
+
+
+                <label className="control-label" for="emergencyrelationship" id="emergencyrelationshipLabel">Relationship:</label>
+
+                <input type="email" class="form-control" id="emergencyrelationship" ref="emergencyrelationship"></input>
+
+
+              </div>
+
+            </div>
+
+            <div className="col-md-3">
+
+              <div className="form-group">
+
+
+                <label className="control-label" for="emergencyphone" id="emergencyphoneLabel">Phone Number:</label>
+
+                <input type="email" class="form-control" id="emergencyphone" ref="emergencyphone" placeholder="##########" maxlength="10"></input>
+
+
+              </div>
+
+            </div>
+
+            <div className="col-md-3">
+
+              <div className="form-group">
+
+
+                <label className="control-label" for="emergencyemail" id="emergencyemailLabel">Email:</label>
+
+                <input type="email" class="form-control" id="emergencyemail" ref="emergencyemail" placeholder="example@example.com"></input>
+
+
+              </div>
+
+            </div>
 
           </div>
 
         </div>
-
-        <div className="col-md-3">
-
-          <div className="form-group">
-
-
-            <label className="control-label" for="emergencyemail" id="emergencyemailLabel">Email:</label>
-
-            <input type="email" class="form-control" id="emergencyemail" ref="emergencyemail" placeholder="example@example.com"></input>
-
-
-          </div>
-
-        </div>
-
       </div>
 
 

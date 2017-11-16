@@ -3,7 +3,9 @@ import { Link } from 'react-router-dom';
 
 class Education extends Component {
 
+
 processForm() {
+  localStorage.setItem("complete4", '0');
   document.body.scrollTop = document.documentElement.scrollTop = 0;
   var errorDetected = 0;
   var continueLink = document.getElementById("continue");
@@ -265,7 +267,10 @@ if (!dateTest.test(document.getElementById("graduationDate6").value)) {
 
   if (errorDetected == 0){
 
-    document.getElementById("infoMessage").innerHTML = "Your information has been saved. Press continue below to continue to the next phase of the application " + "<i class='fa fa-check-circle-o' aria-hidden='true'></i>"
+    var complete = '1';
+    localStorage.setItem("complete4", complete);
+
+    document.getElementById("infoMessage").innerHTML = "Your information has been saved. Press continue to move on to the next phase of the application " + "<i class='fa fa-check-circle-o' aria-hidden='true'></i>"
 
       document.getElementById("infoMessage").style.color = "green";
 
@@ -288,6 +293,10 @@ if (!dateTest.test(document.getElementById("graduationDate6").value)) {
 
 
 componentDidMount() {
+
+  if(localStorage.getItem("complete4") == '1') {
+  document.getElementById("continue").style.visibility = 'visible';
+    }
 
   if(localStorage.getItem("highestDegree") !== null) {
     this.refs.highestDegree.value = localStorage.getItem("highestDegree");
@@ -458,7 +467,7 @@ render() {
     </div>
 
     <div className="col-md-6 text-center small-top-buffer">
-      <h3>Education</h3><h6>(Fill out fields that apply to you)</h6>
+      <h3>Education</h3><h6>Please list all schooling history.(Fill out fields that apply to you)</h6>
     </div>
 
     <div className="col-md-3">
@@ -495,797 +504,815 @@ render() {
     <div className="col-md-4 ">
     </div>
 
-      <div className="col-md-4 text-center">
+    <div className="col-md-4 text-center">
 
-    <div className="form-group">
+      <div className="form-group">
 
-      <label for="highestDegree" id="highestDegreeLabel" >What is the highest diploma/degree/certificate you have earned? </label>
+        <label for="highestDegree" id="highestDegreeLabel" >What is the highest diploma/degree/certificate you have earned? </label>
 
-      <select className="form-control" id="highestDegree" name="highestDegree" ref="highestDegree">
-        <option value="none">none</option>
-        <option value="High School Diploma">High School Diploma</option>
-        <option value="Associates Degree">Associates Degree</option>
-        <option value="Bachelors Degree">Bachelors Degree</option>
-        <option value="Masters Degree">Masters Degree</option>
-        <option value="PHD">PHD</option>
-      </select>
+        <select className="form-control" id="highestDegree" name="highestDegree" ref="highestDegree">
+          <option value="none">none</option>
+          <option value="High School Diploma">High School Diploma</option>
+          <option value="Associates Degree">Associates Degree</option>
+          <option value="Bachelors Degree">Bachelors Degree</option>
+          <option value="Masters Degree">Masters Degree</option>
+          <option value="PHD">PHD</option>
+        </select>
+
+      </div>
 
     </div>
-
-  </div>
 
     <div className="col-md-4">
     </div>
 
   </div>
 
-  <div className="row">
-
-    <div className="col-md-2">
-
-  <div className="form-group">
-
-    <label for="schoolType" id="schoolTypeLabel" >School Type:</label>
-
-    <select className="form-control" id="schoolType" name="schoolType" ref="schoolType">
-      <option value="High School">High School</option>
-      <option value="Undergraduate">Undergraduate</option>
-      <option value="Graduate">Graduate</option>
-      <option value="Post Graduate">Post Graduate</option>
-      <option value="Professional">Professional</option>
-    </select>
+  <div className='card bg-light medium-bottom-buffer '>
+    <div class="card-body">
+
+      <div className="row">
+
+        <div className="col-md-2">
+
+          <div className="form-group">
+
+            <label for="schoolType" id="schoolTypeLabel" >School Type:</label>
+
+            <select className="form-control" id="schoolType" name="schoolType" ref="schoolType">
+              <option value="--">--</option>
+              <option value="High School">High School</option>
+              <option value="Undergraduate">Undergraduate</option>
+              <option value="Graduate">Graduate</option>
+              <option value="Post Graduate">Post Graduate</option>
+              <option value="Professional">Professional</option>
+            </select>
 
-  </div>
+          </div>
 
-</div>
+        </div>
 
-<div className="col-md-3">
+        <div className="col-md-3">
 
-  <div className="form-group">
+          <div className="form-group">
 
-    <label for="schoolName" id="schoolNameLabel">School Name:</label>
+            <label for="schoolName" id="schoolNameLabel">School Name:</label>
 
-    <input type="text" className="form-control" id="schoolName" ref="schoolName"></input>
+            <input type="text" className="form-control" id="schoolName" ref="schoolName"></input>
 
-  </div>
+          </div>
 
 
-</div>
+        </div>
 
-<div className="col-md-2">
+        <div className="col-md-2">
 
-  <div className="form-group">
+          <div className="form-group">
 
-    <label for="schoolState" id="schoolStateLabel" >State:</label>
+            <label for="schoolState" id="schoolStateLabel" >State:</label>
 
-    <select className="form-control" id="schoolState" name="schoolState" ref="schoolState">
-      <option value="AK">Alaska</option>
-      <option value="AL">Alabama</option>
-      <option value="AR">Arkansas</option>
-      <option value="AZ">Arizona</option>
-      <option value="CA">California</option>
-      <option value="CO">Colorado</option>
-      <option value="CT">Connecticut</option>
-      <option value="DC">District of Columbia</option>
-      <option value="DE">Delaware</option>
-      <option value="FL">Florida</option>
-      <option value="GA">Georgia</option>
-      <option value="HI">Hawaii</option>
-      <option value="IA">Iowa</option>
-      <option value="ID">Idaho</option>
-      <option value="IL">Illinois</option>
-      <option value="IN">Indiana</option>
-      <option value="KS">Kansas</option>
-      <option value="KY">Kentucky</option>
-      <option value="LA">Louisiana</option>
-      <option value="MA">Massachusetts</option>
-      <option value="MD">Maryland</option>
-      <option value="ME">Maine</option>
-      <option value="MI">Michigan</option>
-      <option value="MN">Minnesota</option>
-      <option value="MO">Missouri</option>
-      <option value="MS">Mississippi</option>
-      <option value="MT">Montana</option>
-      <option value="NC">North Carolina</option>
-      <option value="ND">North Dakota</option>
-      <option value="NE">Nebraska</option>
-      <option value="NH">New Hampshire</option>
-      <option value="NJ">New Jersey</option>
-      <option value="NM">New Mexico</option>
-      <option value="NV">Nevada</option>
-      <option value="NY">New York</option>
-      <option value="OH">Ohio</option>
-      <option value="OK">Oklahoma</option>
-      <option value="OR">Oregon</option>
-      <option value="PA">Pennsylvania</option>
-      <option value="PR">Puerto Rico</option>
-      <option value="RI">Rhode Island</option>
-      <option value="SC">South Carolina</option>
-      <option value="SD">South Dakota</option>
-      <option value="TN">Tennessee</option>
-      <option value="TX">Texas</option>
-      <option value="UT">Utah</option>
-      <option value="VA">Virginia</option>
-      <option value="VT">Vermont</option>
-      <option value="WA">Washington</option>
-      <option value="WI">Wisconsin</option>
-      <option value="WV">West Virginia</option>
-      <option value="WY">Wyoming</option>
-    </select>
+            <select className="form-control" id="schoolState" name="schoolState" ref="schoolState">
+              <option value="--">--</option>
+              <option value="AK">Alaska</option>
+              <option value="AL">Alabama</option>
+              <option value="AR">Arkansas</option>
+              <option value="AZ">Arizona</option>
+              <option value="CA">California</option>
+              <option value="CO">Colorado</option>
+              <option value="CT">Connecticut</option>
+              <option value="DC">District of Columbia</option>
+              <option value="DE">Delaware</option>
+              <option value="FL">Florida</option>
+              <option value="GA">Georgia</option>
+              <option value="HI">Hawaii</option>
+              <option value="IA">Iowa</option>
+              <option value="ID">Idaho</option>
+              <option value="IL">Illinois</option>
+              <option value="IN">Indiana</option>
+              <option value="KS">Kansas</option>
+              <option value="KY">Kentucky</option>
+              <option value="LA">Louisiana</option>
+              <option value="MA">Massachusetts</option>
+              <option value="MD">Maryland</option>
+              <option value="ME">Maine</option>
+              <option value="MI">Michigan</option>
+              <option value="MN">Minnesota</option>
+              <option value="MO">Missouri</option>
+              <option value="MS">Mississippi</option>
+              <option value="MT">Montana</option>
+              <option value="NC">North Carolina</option>
+              <option value="ND">North Dakota</option>
+              <option value="NE">Nebraska</option>
+              <option value="NH">New Hampshire</option>
+              <option value="NJ">New Jersey</option>
+              <option value="NM">New Mexico</option>
+              <option value="NV">Nevada</option>
+              <option value="NY">New York</option>
+              <option value="OH">Ohio</option>
+              <option value="OK">Oklahoma</option>
+              <option value="OR">Oregon</option>
+              <option value="PA">Pennsylvania</option>
+              <option value="PR">Puerto Rico</option>
+              <option value="RI">Rhode Island</option>
+              <option value="SC">South Carolina</option>
+              <option value="SD">South Dakota</option>
+              <option value="TN">Tennessee</option>
+              <option value="TX">Texas</option>
+              <option value="UT">Utah</option>
+              <option value="VA">Virginia</option>
+              <option value="VT">Vermont</option>
+              <option value="WA">Washington</option>
+              <option value="WI">Wisconsin</option>
+              <option value="WV">West Virginia</option>
+              <option value="WY">Wyoming</option>
+            </select>
 
-  </div>
+          </div>
 
 
-</div>
+        </div>
 
-<div className="col-md-2">
+        <div className="col-md-2">
 
-  <div className="form-group">
+          <div className="form-group">
 
-    <label for="graduationDate" id="graduationDateLabel">Graduation Date:</label>
+            <label for="graduationDate" id="graduationDateLabel">Graduation Date:</label>
 
-    <input type="text" className="form-control" id="graduationDate" ref="graduationDate" placeholder="mm/dd/yyyy"></input>
+            <input type="text" className="form-control" id="graduationDate" ref="graduationDate" placeholder="mm/dd/yyyy"></input>
 
-  </div>
+          </div>
 
 
-</div>
+        </div>
 
-<div className="col-md-3">
+        <div className="col-md-3">
 
-  <div className="form-group">
+          <div className="form-group">
 
-    <label for="degree" id="degreeLabel">Degree/Certificate:</label>
+            <label for="degree" id="degreeLabel">Degree/Certificate:</label>
 
-    <input type="text" className="form-control" id="degree" ref="degree"></input>
+            <input type="text" className="form-control" id="degree" ref="degree"></input>
 
-  </div>
+          </div>
 
 
-</div>
+        </div>
 
 
-  </div>
+      </div>
 
 
-  <div className="row">
+      <div className="row">
 
-    <div className="col-md-2">
+        <div className="col-md-2">
 
-  <div className="form-group">
+          <div className="form-group">
 
-    <label for="schoolType2" id="schoolTypeLabel2" >School Type:</label>
+            <label for="schoolType2" id="schoolTypeLabel2" >School Type:</label>
 
-    <select className="form-control" id="schoolType2" name="schoolType2" ref="schoolType2">
-      <option value="High School">High School</option>
-      <option value="Undergraduate">Undergraduate</option>
-      <option value="Graduate">Graduate</option>
-      <option value="Post Graduate">Post Graduate</option>
-      <option value="Professional">Professional</option>
-    </select>
+            <select className="form-control" id="schoolType2" name="schoolType2" ref="schoolType2">
+              <option value="--">--</option>
+              <option value="High School">High School</option>
+              <option value="Undergraduate">Undergraduate</option>
+              <option value="Graduate">Graduate</option>
+              <option value="Post Graduate">Post Graduate</option>
+              <option value="Professional">Professional</option>
+            </select>
 
-  </div>
+          </div>
 
-</div>
+        </div>
 
-<div className="col-md-3">
+        <div className="col-md-3">
 
-  <div className="form-group">
+          <div className="form-group">
 
-    <label for="schoolName2" id="schoolNameLabel2">School Name:</label>
+            <label for="schoolName2" id="schoolNameLabel2">School Name:</label>
 
-    <input type="text" className="form-control" id="schoolName2" ref="schoolName2"></input>
+            <input type="text" className="form-control" id="schoolName2" ref="schoolName2"></input>
 
-  </div>
+          </div>
 
 
-</div>
+        </div>
 
-<div className="col-md-2">
+        <div className="col-md-2">
 
-  <div className="form-group">
+          <div className="form-group">
 
-    <label for="schoolState2" id="schoolStateLabel2" >State:</label>
+            <label for="schoolState2" id="schoolStateLabel2" >State:</label>
 
-    <select className="form-control" id="schoolState2" name="schoolState2" ref="schoolState2">
-      <option value="AK">Alaska</option>
-      <option value="AL">Alabama</option>
-      <option value="AR">Arkansas</option>
-      <option value="AZ">Arizona</option>
-      <option value="CA">California</option>
-      <option value="CO">Colorado</option>
-      <option value="CT">Connecticut</option>
-      <option value="DC">District of Columbia</option>
-      <option value="DE">Delaware</option>
-      <option value="FL">Florida</option>
-      <option value="GA">Georgia</option>
-      <option value="HI">Hawaii</option>
-      <option value="IA">Iowa</option>
-      <option value="ID">Idaho</option>
-      <option value="IL">Illinois</option>
-      <option value="IN">Indiana</option>
-      <option value="KS">Kansas</option>
-      <option value="KY">Kentucky</option>
-      <option value="LA">Louisiana</option>
-      <option value="MA">Massachusetts</option>
-      <option value="MD">Maryland</option>
-      <option value="ME">Maine</option>
-      <option value="MI">Michigan</option>
-      <option value="MN">Minnesota</option>
-      <option value="MO">Missouri</option>
-      <option value="MS">Mississippi</option>
-      <option value="MT">Montana</option>
-      <option value="NC">North Carolina</option>
-      <option value="ND">North Dakota</option>
-      <option value="NE">Nebraska</option>
-      <option value="NH">New Hampshire</option>
-      <option value="NJ">New Jersey</option>
-      <option value="NM">New Mexico</option>
-      <option value="NV">Nevada</option>
-      <option value="NY">New York</option>
-      <option value="OH">Ohio</option>
-      <option value="OK">Oklahoma</option>
-      <option value="OR">Oregon</option>
-      <option value="PA">Pennsylvania</option>
-      <option value="PR">Puerto Rico</option>
-      <option value="RI">Rhode Island</option>
-      <option value="SC">South Carolina</option>
-      <option value="SD">South Dakota</option>
-      <option value="TN">Tennessee</option>
-      <option value="TX">Texas</option>
-      <option value="UT">Utah</option>
-      <option value="VA">Virginia</option>
-      <option value="VT">Vermont</option>
-      <option value="WA">Washington</option>
-      <option value="WI">Wisconsin</option>
-      <option value="WV">West Virginia</option>
-      <option value="WY">Wyoming</option>
-    </select>
+            <select className="form-control" id="schoolState2" name="schoolState2" ref="schoolState2">
+              <option value="--">--</option>
+              <option value="AK">Alaska</option>
+              <option value="AL">Alabama</option>
+              <option value="AR">Arkansas</option>
+              <option value="AZ">Arizona</option>
+              <option value="CA">California</option>
+              <option value="CO">Colorado</option>
+              <option value="CT">Connecticut</option>
+              <option value="DC">District of Columbia</option>
+              <option value="DE">Delaware</option>
+              <option value="FL">Florida</option>
+              <option value="GA">Georgia</option>
+              <option value="HI">Hawaii</option>
+              <option value="IA">Iowa</option>
+              <option value="ID">Idaho</option>
+              <option value="IL">Illinois</option>
+              <option value="IN">Indiana</option>
+              <option value="KS">Kansas</option>
+              <option value="KY">Kentucky</option>
+              <option value="LA">Louisiana</option>
+              <option value="MA">Massachusetts</option>
+              <option value="MD">Maryland</option>
+              <option value="ME">Maine</option>
+              <option value="MI">Michigan</option>
+              <option value="MN">Minnesota</option>
+              <option value="MO">Missouri</option>
+              <option value="MS">Mississippi</option>
+              <option value="MT">Montana</option>
+              <option value="NC">North Carolina</option>
+              <option value="ND">North Dakota</option>
+              <option value="NE">Nebraska</option>
+              <option value="NH">New Hampshire</option>
+              <option value="NJ">New Jersey</option>
+              <option value="NM">New Mexico</option>
+              <option value="NV">Nevada</option>
+              <option value="NY">New York</option>
+              <option value="OH">Ohio</option>
+              <option value="OK">Oklahoma</option>
+              <option value="OR">Oregon</option>
+              <option value="PA">Pennsylvania</option>
+              <option value="PR">Puerto Rico</option>
+              <option value="RI">Rhode Island</option>
+              <option value="SC">South Carolina</option>
+              <option value="SD">South Dakota</option>
+              <option value="TN">Tennessee</option>
+              <option value="TX">Texas</option>
+              <option value="UT">Utah</option>
+              <option value="VA">Virginia</option>
+              <option value="VT">Vermont</option>
+              <option value="WA">Washington</option>
+              <option value="WI">Wisconsin</option>
+              <option value="WV">West Virginia</option>
+              <option value="WY">Wyoming</option>
+            </select>
 
-  </div>
+          </div>
 
 
-</div>
+        </div>
 
-<div className="col-md-2">
+        <div className="col-md-2">
 
-  <div className="form-group">
+          <div className="form-group">
 
-    <label for="graduationDate2" id="graduationDateLabel2">Graduation Date:</label>
+            <label for="graduationDate2" id="graduationDateLabel2">Graduation Date:</label>
 
-    <input type="text" className="form-control" id="graduationDate2" ref="graduationDate2" placeholder="mm/dd/yyyy"></input>
+            <input type="text" className="form-control" id="graduationDate2" ref="graduationDate2" placeholder="mm/dd/yyyy"></input>
 
-  </div>
+          </div>
 
 
-</div>
+        </div>
 
-<div className="col-md-3">
+        <div className="col-md-3">
 
-  <div className="form-group">
+          <div className="form-group">
 
-    <label for="degree2" id="degreeLabel2">Degree/Certificate:</label>
+            <label for="degree2" id="degreeLabel2">Degree/Certificate:</label>
 
-    <input type="text" className="form-control" id="degree2" ref="degree2"></input>
+            <input type="text" className="form-control" id="degree2" ref="degree2"></input>
 
-  </div>
+          </div>
 
 
-</div>
+        </div>
 
 
-  </div>
+      </div>
 
-  <div className="row">
+      <div className="row">
 
-    <div className="col-md-2">
+        <div className="col-md-2">
 
-  <div className="form-group">
+          <div className="form-group">
 
-    <label for="schoolType3" id="schoolTypeLabel3" >School Type:</label>
+            <label for="schoolType3" id="schoolTypeLabel3" >School Type:</label>
 
-    <select className="form-control" id="schoolType3" name="schoolType3" ref="schoolType3">
-      <option value="High School">High School</option>
-      <option value="Undergraduate">Undergraduate</option>
-      <option value="Graduate">Graduate</option>
-      <option value="Post Graduate">Post Graduate</option>
-      <option value="Professional">Professional</option>
-    </select>
+            <select className="form-control" id="schoolType3" name="schoolType3" ref="schoolType3">
+              <option value="--">--</option>
+              <option value="High School">High School</option>
+              <option value="Undergraduate">Undergraduate</option>
+              <option value="Graduate">Graduate</option>
+              <option value="Post Graduate">Post Graduate</option>
+              <option value="Professional">Professional</option>
+            </select>
 
-  </div>
+          </div>
 
-</div>
+        </div>
 
-<div className="col-md-3">
+        <div className="col-md-3">
 
-  <div className="form-group">
+          <div className="form-group">
 
-    <label for="schoolName3" id="schoolNameLabel3">School Name:</label>
+            <label for="schoolName3" id="schoolNameLabel3">School Name:</label>
 
-    <input type="text" className="form-control" id="schoolName3" ref="schoolName3"></input>
+            <input type="text" className="form-control" id="schoolName3" ref="schoolName3"></input>
 
-  </div>
+          </div>
 
 
-</div>
+        </div>
 
-<div className="col-md-2">
+        <div className="col-md-2">
 
-  <div className="form-group">
+          <div className="form-group">
 
-    <label for="schoolState3" id="schoolStateLabel3" >State:</label>
+            <label for="schoolState3" id="schoolStateLabel3" >State:</label>
 
-    <select className="form-control" id="schoolState3" name="schoolState3" ref="schoolState3">
-      <option value="AK">Alaska</option>
-      <option value="AL">Alabama</option>
-      <option value="AR">Arkansas</option>
-      <option value="AZ">Arizona</option>
-      <option value="CA">California</option>
-      <option value="CO">Colorado</option>
-      <option value="CT">Connecticut</option>
-      <option value="DC">District of Columbia</option>
-      <option value="DE">Delaware</option>
-      <option value="FL">Florida</option>
-      <option value="GA">Georgia</option>
-      <option value="HI">Hawaii</option>
-      <option value="IA">Iowa</option>
-      <option value="ID">Idaho</option>
-      <option value="IL">Illinois</option>
-      <option value="IN">Indiana</option>
-      <option value="KS">Kansas</option>
-      <option value="KY">Kentucky</option>
-      <option value="LA">Louisiana</option>
-      <option value="MA">Massachusetts</option>
-      <option value="MD">Maryland</option>
-      <option value="ME">Maine</option>
-      <option value="MI">Michigan</option>
-      <option value="MN">Minnesota</option>
-      <option value="MO">Missouri</option>
-      <option value="MS">Mississippi</option>
-      <option value="MT">Montana</option>
-      <option value="NC">North Carolina</option>
-      <option value="ND">North Dakota</option>
-      <option value="NE">Nebraska</option>
-      <option value="NH">New Hampshire</option>
-      <option value="NJ">New Jersey</option>
-      <option value="NM">New Mexico</option>
-      <option value="NV">Nevada</option>
-      <option value="NY">New York</option>
-      <option value="OH">Ohio</option>
-      <option value="OK">Oklahoma</option>
-      <option value="OR">Oregon</option>
-      <option value="PA">Pennsylvania</option>
-      <option value="PR">Puerto Rico</option>
-      <option value="RI">Rhode Island</option>
-      <option value="SC">South Carolina</option>
-      <option value="SD">South Dakota</option>
-      <option value="TN">Tennessee</option>
-      <option value="TX">Texas</option>
-      <option value="UT">Utah</option>
-      <option value="VA">Virginia</option>
-      <option value="VT">Vermont</option>
-      <option value="WA">Washington</option>
-      <option value="WI">Wisconsin</option>
-      <option value="WV">West Virginia</option>
-      <option value="WY">Wyoming</option>
-    </select>
+            <select className="form-control" id="schoolState3" name="schoolState3" ref="schoolState3">
+              <option value="--">--</option>
+              <option value="AK">Alaska</option>
+              <option value="AL">Alabama</option>
+              <option value="AR">Arkansas</option>
+              <option value="AZ">Arizona</option>
+              <option value="CA">California</option>
+              <option value="CO">Colorado</option>
+              <option value="CT">Connecticut</option>
+              <option value="DC">District of Columbia</option>
+              <option value="DE">Delaware</option>
+              <option value="FL">Florida</option>
+              <option value="GA">Georgia</option>
+              <option value="HI">Hawaii</option>
+              <option value="IA">Iowa</option>
+              <option value="ID">Idaho</option>
+              <option value="IL">Illinois</option>
+              <option value="IN">Indiana</option>
+              <option value="KS">Kansas</option>
+              <option value="KY">Kentucky</option>
+              <option value="LA">Louisiana</option>
+              <option value="MA">Massachusetts</option>
+              <option value="MD">Maryland</option>
+              <option value="ME">Maine</option>
+              <option value="MI">Michigan</option>
+              <option value="MN">Minnesota</option>
+              <option value="MO">Missouri</option>
+              <option value="MS">Mississippi</option>
+              <option value="MT">Montana</option>
+              <option value="NC">North Carolina</option>
+              <option value="ND">North Dakota</option>
+              <option value="NE">Nebraska</option>
+              <option value="NH">New Hampshire</option>
+              <option value="NJ">New Jersey</option>
+              <option value="NM">New Mexico</option>
+              <option value="NV">Nevada</option>
+              <option value="NY">New York</option>
+              <option value="OH">Ohio</option>
+              <option value="OK">Oklahoma</option>
+              <option value="OR">Oregon</option>
+              <option value="PA">Pennsylvania</option>
+              <option value="PR">Puerto Rico</option>
+              <option value="RI">Rhode Island</option>
+              <option value="SC">South Carolina</option>
+              <option value="SD">South Dakota</option>
+              <option value="TN">Tennessee</option>
+              <option value="TX">Texas</option>
+              <option value="UT">Utah</option>
+              <option value="VA">Virginia</option>
+              <option value="VT">Vermont</option>
+              <option value="WA">Washington</option>
+              <option value="WI">Wisconsin</option>
+              <option value="WV">West Virginia</option>
+              <option value="WY">Wyoming</option>
+            </select>
 
-  </div>
+          </div>
 
 
-</div>
+        </div>
 
-<div className="col-md-2">
+        <div className="col-md-2">
 
-  <div className="form-group">
+          <div className="form-group">
 
-    <label for="graduationDate3" id="graduationDateLabel3">Graduation Date:</label>
+            <label for="graduationDate3" id="graduationDateLabel3">Graduation Date:</label>
 
-    <input type="text" className="form-control" id="graduationDate3" ref="graduationDate3" placeholder="mm/dd/yyyy"></input>
+            <input type="text" className="form-control" id="graduationDate3" ref="graduationDate3" placeholder="mm/dd/yyyy"></input>
 
-  </div>
+          </div>
 
 
-</div>
+        </div>
 
-<div className="col-md-3">
+        <div className="col-md-3">
 
-  <div className="form-group">
+          <div className="form-group">
 
-    <label for="degree3" id="degreeLabel3">Degree/Certificate:</label>
+            <label for="degree3" id="degreeLabel3">Degree/Certificate:</label>
 
-    <input type="text" className="form-control" id="degree3" ref="degree3"></input>
+            <input type="text" className="form-control" id="degree3" ref="degree3"></input>
 
-  </div>
+          </div>
 
 
-</div>
+        </div>
 
 
-  </div>
+      </div>
 
-  <div className="row">
+      <div className="row">
 
-    <div className="col-md-2">
+        <div className="col-md-2">
 
-  <div className="form-group">
+          <div className="form-group">
 
-    <label for="schoolType4" id="schoolTypeLabel4" >School Type:</label>
+            <label for="schoolType4" id="schoolTypeLabel4" >School Type:</label>
 
-    <select className="form-control" id="schoolType4" name="schoolType4" ref="schoolType4">
-      <option value="High School">High School</option>
-      <option value="Undergraduate">Undergraduate</option>
-      <option value="Graduate">Graduate</option>
-      <option value="Post Graduate">Post Graduate</option>
-      <option value="Professional">Professional</option>
-    </select>
+            <select className="form-control" id="schoolType4" name="schoolType4" ref="schoolType4">
+              <option value="--">--</option>
+              <option value="High School">High School</option>
+              <option value="Undergraduate">Undergraduate</option>
+              <option value="Graduate">Graduate</option>
+              <option value="Post Graduate">Post Graduate</option>
+              <option value="Professional">Professional</option>
+            </select>
 
-  </div>
+          </div>
 
-</div>
+        </div>
 
-<div className="col-md-3">
+        <div className="col-md-3">
 
-  <div className="form-group">
+          <div className="form-group">
 
-    <label for="schoolName4" id="schoolNameLabel4">School Name:</label>
+            <label for="schoolName4" id="schoolNameLabel4">School Name:</label>
 
-    <input type="text" className="form-control" id="schoolName4" ref="schoolName4"></input>
+            <input type="text" className="form-control" id="schoolName4" ref="schoolName4"></input>
 
-  </div>
+          </div>
 
 
-</div>
+        </div>
 
-<div className="col-md-2">
+        <div className="col-md-2">
 
-  <div className="form-group">
+          <div className="form-group">
 
-    <label for="schoolState4" id="schoolStateLabel4" >State:</label>
+            <label for="schoolState4" id="schoolStateLabel4" >State:</label>
 
-    <select className="form-control" id="schoolState4" name="schoolState4" ref="schoolState4">
-      <option value="AK">Alaska</option>
-      <option value="AL">Alabama</option>
-      <option value="AR">Arkansas</option>
-      <option value="AZ">Arizona</option>
-      <option value="CA">California</option>
-      <option value="CO">Colorado</option>
-      <option value="CT">Connecticut</option>
-      <option value="DC">District of Columbia</option>
-      <option value="DE">Delaware</option>
-      <option value="FL">Florida</option>
-      <option value="GA">Georgia</option>
-      <option value="HI">Hawaii</option>
-      <option value="IA">Iowa</option>
-      <option value="ID">Idaho</option>
-      <option value="IL">Illinois</option>
-      <option value="IN">Indiana</option>
-      <option value="KS">Kansas</option>
-      <option value="KY">Kentucky</option>
-      <option value="LA">Louisiana</option>
-      <option value="MA">Massachusetts</option>
-      <option value="MD">Maryland</option>
-      <option value="ME">Maine</option>
-      <option value="MI">Michigan</option>
-      <option value="MN">Minnesota</option>
-      <option value="MO">Missouri</option>
-      <option value="MS">Mississippi</option>
-      <option value="MT">Montana</option>
-      <option value="NC">North Carolina</option>
-      <option value="ND">North Dakota</option>
-      <option value="NE">Nebraska</option>
-      <option value="NH">New Hampshire</option>
-      <option value="NJ">New Jersey</option>
-      <option value="NM">New Mexico</option>
-      <option value="NV">Nevada</option>
-      <option value="NY">New York</option>
-      <option value="OH">Ohio</option>
-      <option value="OK">Oklahoma</option>
-      <option value="OR">Oregon</option>
-      <option value="PA">Pennsylvania</option>
-      <option value="PR">Puerto Rico</option>
-      <option value="RI">Rhode Island</option>
-      <option value="SC">South Carolina</option>
-      <option value="SD">South Dakota</option>
-      <option value="TN">Tennessee</option>
-      <option value="TX">Texas</option>
-      <option value="UT">Utah</option>
-      <option value="VA">Virginia</option>
-      <option value="VT">Vermont</option>
-      <option value="WA">Washington</option>
-      <option value="WI">Wisconsin</option>
-      <option value="WV">West Virginia</option>
-      <option value="WY">Wyoming</option>
-    </select>
+            <select className="form-control" id="schoolState4" name="schoolState4" ref="schoolState4">
+              <option value="--">--</option>
+              <option value="AK">Alaska</option>
+              <option value="AL">Alabama</option>
+              <option value="AR">Arkansas</option>
+              <option value="AZ">Arizona</option>
+              <option value="CA">California</option>
+              <option value="CO">Colorado</option>
+              <option value="CT">Connecticut</option>
+              <option value="DC">District of Columbia</option>
+              <option value="DE">Delaware</option>
+              <option value="FL">Florida</option>
+              <option value="GA">Georgia</option>
+              <option value="HI">Hawaii</option>
+              <option value="IA">Iowa</option>
+              <option value="ID">Idaho</option>
+              <option value="IL">Illinois</option>
+              <option value="IN">Indiana</option>
+              <option value="KS">Kansas</option>
+              <option value="KY">Kentucky</option>
+              <option value="LA">Louisiana</option>
+              <option value="MA">Massachusetts</option>
+              <option value="MD">Maryland</option>
+              <option value="ME">Maine</option>
+              <option value="MI">Michigan</option>
+              <option value="MN">Minnesota</option>
+              <option value="MO">Missouri</option>
+              <option value="MS">Mississippi</option>
+              <option value="MT">Montana</option>
+              <option value="NC">North Carolina</option>
+              <option value="ND">North Dakota</option>
+              <option value="NE">Nebraska</option>
+              <option value="NH">New Hampshire</option>
+              <option value="NJ">New Jersey</option>
+              <option value="NM">New Mexico</option>
+              <option value="NV">Nevada</option>
+              <option value="NY">New York</option>
+              <option value="OH">Ohio</option>
+              <option value="OK">Oklahoma</option>
+              <option value="OR">Oregon</option>
+              <option value="PA">Pennsylvania</option>
+              <option value="PR">Puerto Rico</option>
+              <option value="RI">Rhode Island</option>
+              <option value="SC">South Carolina</option>
+              <option value="SD">South Dakota</option>
+              <option value="TN">Tennessee</option>
+              <option value="TX">Texas</option>
+              <option value="UT">Utah</option>
+              <option value="VA">Virginia</option>
+              <option value="VT">Vermont</option>
+              <option value="WA">Washington</option>
+              <option value="WI">Wisconsin</option>
+              <option value="WV">West Virginia</option>
+              <option value="WY">Wyoming</option>
+            </select>
 
-  </div>
+          </div>
 
 
-</div>
+        </div>
 
-<div className="col-md-2">
+        <div className="col-md-2">
 
-  <div className="form-group">
+          <div className="form-group">
 
-    <label for="graduationDate4" id="graduationDateLabel4">Graduation Date:</label>
+            <label for="graduationDate4" id="graduationDateLabel4">Graduation Date:</label>
 
-    <input type="text" className="form-control" id="graduationDate4" ref="graduationDate4" placeholder="mm/dd/yyyy"></input>
+            <input type="text" className="form-control" id="graduationDate4" ref="graduationDate4" placeholder="mm/dd/yyyy"></input>
 
-  </div>
+          </div>
 
 
-</div>
+        </div>
 
-<div className="col-md-3">
+        <div className="col-md-3">
 
-  <div className="form-group">
+          <div className="form-group">
 
-    <label for="degree4" id="degreeLabel4">Degree/Certificate:</label>
+            <label for="degree4" id="degreeLabel4">Degree/Certificate:</label>
 
-    <input type="text" className="form-control" id="degree4" ref="degree4"></input>
+            <input type="text" className="form-control" id="degree4" ref="degree4"></input>
 
-  </div>
+          </div>
 
 
-</div>
+        </div>
 
 
-  </div>
+      </div>
 
-  <div className="row">
+      <div className="row">
 
-    <div className="col-md-2">
+        <div className="col-md-2">
 
-  <div className="form-group">
+          <div className="form-group">
 
-    <label for="schoolType5" id="schoolTypeLabel5" >School Type:</label>
+            <label for="schoolType5" id="schoolTypeLabel5" >School Type:</label>
 
-    <select className="form-control" id="schoolType5" name="schoolType5" ref="schoolType5">
-      <option value="High School">High School</option>
-      <option value="Undergraduate">Undergraduate</option>
-      <option value="Graduate">Graduate</option>
-      <option value="Post Graduate">Post Graduate</option>
-      <option value="Professional">Professional</option>
-    </select>
+            <select className="form-control" id="schoolType5" name="schoolType5" ref="schoolType5">
+              <option value="--">--</option>
+              <option value="High School">High School</option>
+              <option value="Undergraduate">Undergraduate</option>
+              <option value="Graduate">Graduate</option>
+              <option value="Post Graduate">Post Graduate</option>
+              <option value="Professional">Professional</option>
+            </select>
 
-  </div>
+          </div>
 
-</div>
+        </div>
 
-<div className="col-md-3">
+        <div className="col-md-3">
 
-  <div className="form-group">
+          <div className="form-group">
 
-    <label for="schoolName5" id="schoolNameLabel5">School Name:</label>
+            <label for="schoolName5" id="schoolNameLabel5">School Name:</label>
 
-    <input type="text" className="form-control" id="schoolName5" ref="schoolName5"></input>
+            <input type="text" className="form-control" id="schoolName5" ref="schoolName5"></input>
 
-  </div>
+          </div>
 
 
-</div>
+        </div>
 
-<div className="col-md-2">
+        <div className="col-md-2">
 
-  <div className="form-group">
+          <div className="form-group">
 
-    <label for="schoolState5" id="schoolStateLabel5" >State:</label>
+            <label for="schoolState5" id="schoolStateLabel5" >State:</label>
 
-    <select className="form-control" id="schoolState5" name="schoolState5" ref="schoolState5">
-      <option value="AK">Alaska</option>
-      <option value="AL">Alabama</option>
-      <option value="AR">Arkansas</option>
-      <option value="AZ">Arizona</option>
-      <option value="CA">California</option>
-      <option value="CO">Colorado</option>
-      <option value="CT">Connecticut</option>
-      <option value="DC">District of Columbia</option>
-      <option value="DE">Delaware</option>
-      <option value="FL">Florida</option>
-      <option value="GA">Georgia</option>
-      <option value="HI">Hawaii</option>
-      <option value="IA">Iowa</option>
-      <option value="ID">Idaho</option>
-      <option value="IL">Illinois</option>
-      <option value="IN">Indiana</option>
-      <option value="KS">Kansas</option>
-      <option value="KY">Kentucky</option>
-      <option value="LA">Louisiana</option>
-      <option value="MA">Massachusetts</option>
-      <option value="MD">Maryland</option>
-      <option value="ME">Maine</option>
-      <option value="MI">Michigan</option>
-      <option value="MN">Minnesota</option>
-      <option value="MO">Missouri</option>
-      <option value="MS">Mississippi</option>
-      <option value="MT">Montana</option>
-      <option value="NC">North Carolina</option>
-      <option value="ND">North Dakota</option>
-      <option value="NE">Nebraska</option>
-      <option value="NH">New Hampshire</option>
-      <option value="NJ">New Jersey</option>
-      <option value="NM">New Mexico</option>
-      <option value="NV">Nevada</option>
-      <option value="NY">New York</option>
-      <option value="OH">Ohio</option>
-      <option value="OK">Oklahoma</option>
-      <option value="OR">Oregon</option>
-      <option value="PA">Pennsylvania</option>
-      <option value="PR">Puerto Rico</option>
-      <option value="RI">Rhode Island</option>
-      <option value="SC">South Carolina</option>
-      <option value="SD">South Dakota</option>
-      <option value="TN">Tennessee</option>
-      <option value="TX">Texas</option>
-      <option value="UT">Utah</option>
-      <option value="VA">Virginia</option>
-      <option value="VT">Vermont</option>
-      <option value="WA">Washington</option>
-      <option value="WI">Wisconsin</option>
-      <option value="WV">West Virginia</option>
-      <option value="WY">Wyoming</option>
-    </select>
+            <select className="form-control" id="schoolState5" name="schoolState5" ref="schoolState5">
+              <option value="--">--</option>
+              <option value="AK">Alaska</option>
+              <option value="AL">Alabama</option>
+              <option value="AR">Arkansas</option>
+              <option value="AZ">Arizona</option>
+              <option value="CA">California</option>
+              <option value="CO">Colorado</option>
+              <option value="CT">Connecticut</option>
+              <option value="DC">District of Columbia</option>
+              <option value="DE">Delaware</option>
+              <option value="FL">Florida</option>
+              <option value="GA">Georgia</option>
+              <option value="HI">Hawaii</option>
+              <option value="IA">Iowa</option>
+              <option value="ID">Idaho</option>
+              <option value="IL">Illinois</option>
+              <option value="IN">Indiana</option>
+              <option value="KS">Kansas</option>
+              <option value="KY">Kentucky</option>
+              <option value="LA">Louisiana</option>
+              <option value="MA">Massachusetts</option>
+              <option value="MD">Maryland</option>
+              <option value="ME">Maine</option>
+              <option value="MI">Michigan</option>
+              <option value="MN">Minnesota</option>
+              <option value="MO">Missouri</option>
+              <option value="MS">Mississippi</option>
+              <option value="MT">Montana</option>
+              <option value="NC">North Carolina</option>
+              <option value="ND">North Dakota</option>
+              <option value="NE">Nebraska</option>
+              <option value="NH">New Hampshire</option>
+              <option value="NJ">New Jersey</option>
+              <option value="NM">New Mexico</option>
+              <option value="NV">Nevada</option>
+              <option value="NY">New York</option>
+              <option value="OH">Ohio</option>
+              <option value="OK">Oklahoma</option>
+              <option value="OR">Oregon</option>
+              <option value="PA">Pennsylvania</option>
+              <option value="PR">Puerto Rico</option>
+              <option value="RI">Rhode Island</option>
+              <option value="SC">South Carolina</option>
+              <option value="SD">South Dakota</option>
+              <option value="TN">Tennessee</option>
+              <option value="TX">Texas</option>
+              <option value="UT">Utah</option>
+              <option value="VA">Virginia</option>
+              <option value="VT">Vermont</option>
+              <option value="WA">Washington</option>
+              <option value="WI">Wisconsin</option>
+              <option value="WV">West Virginia</option>
+              <option value="WY">Wyoming</option>
+            </select>
 
-  </div>
+          </div>
 
 
-</div>
+        </div>
 
-<div className="col-md-2">
+        <div className="col-md-2">
 
-  <div className="form-group">
+          <div className="form-group">
 
-    <label for="graduationDate5" id="graduationDateLabel5">Graduation Date:</label>
+            <label for="graduationDate5" id="graduationDateLabel5">Graduation Date:</label>
 
-    <input type="text" className="form-control" id="graduationDate5" ref="graduationDate5" placeholder="mm/dd/yyyy"></input>
+            <input type="text" className="form-control" id="graduationDate5" ref="graduationDate5" placeholder="mm/dd/yyyy"></input>
 
-  </div>
+          </div>
 
 
-</div>
+        </div>
 
-<div className="col-md-3">
+        <div className="col-md-3">
 
-  <div className="form-group">
+          <div className="form-group">
 
-    <label for="degree5" id="degreeLabel5">Degree/Certificate:</label>
+            <label for="degree5" id="degreeLabel5">Degree/Certificate:</label>
 
-    <input type="text" className="form-control" id="degree5" ref="degree5"></input>
+            <input type="text" className="form-control" id="degree5" ref="degree5"></input>
 
-  </div>
+          </div>
 
 
-</div>
+        </div>
 
 
-  </div>
+      </div>
 
-  <div className="row">
+      <div className="row">
 
-    <div className="col-md-2">
+        <div className="col-md-2">
 
-  <div className="form-group">
+          <div className="form-group">
 
-    <label for="schoolType6" id="schoolTypeLabel6" >School Type:</label>
+            <label for="schoolType6" id="schoolTypeLabel6" >School Type:</label>
 
-    <select className="form-control" id="schoolType6" name="schoolType6" ref="schoolType6">
-      <option value="High School">High School</option>
-      <option value="Undergraduate">Undergraduate</option>
-      <option value="Graduate">Graduate</option>
-      <option value="Post Graduate">Post Graduate</option>
-      <option value="Professional">Professional</option>
-    </select>
+            <select className="form-control" id="schoolType6" name="schoolType6" ref="schoolType6">
+              <option value="--">--</option>
+              <option value="High School">High School</option>
+              <option value="Undergraduate">Undergraduate</option>
+              <option value="Graduate">Graduate</option>
+              <option value="Post Graduate">Post Graduate</option>
+              <option value="Professional">Professional</option>
+            </select>
 
-  </div>
+          </div>
 
-</div>
+        </div>
 
-<div className="col-md-3">
+        <div className="col-md-3">
 
-  <div className="form-group">
+          <div className="form-group">
 
-    <label for="schoolName6" id="schoolNameLabel6">School Name:</label>
+            <label for="schoolName6" id="schoolNameLabel6">School Name:</label>
 
-    <input type="text" className="form-control" id="schoolName6" ref="schoolName6"></input>
+            <input type="text" className="form-control" id="schoolName6" ref="schoolName6"></input>
 
-  </div>
+          </div>
 
 
-</div>
+        </div>
 
-<div className="col-md-2">
+        <div className="col-md-2">
 
-  <div className="form-group">
+          <div className="form-group">
 
-    <label for="schoolState6" id="schoolStateLabel6" >State:</label>
+            <label for="schoolState6" id="schoolStateLabel6" >State:</label>
 
-    <select className="form-control" id="schoolState6" name="schoolState6" ref="schoolState6">
-      <option value="AK">Alaska</option>
-      <option value="AL">Alabama</option>
-      <option value="AR">Arkansas</option>
-      <option value="AZ">Arizona</option>
-      <option value="CA">California</option>
-      <option value="CO">Colorado</option>
-      <option value="CT">Connecticut</option>
-      <option value="DC">District of Columbia</option>
-      <option value="DE">Delaware</option>
-      <option value="FL">Florida</option>
-      <option value="GA">Georgia</option>
-      <option value="HI">Hawaii</option>
-      <option value="IA">Iowa</option>
-      <option value="ID">Idaho</option>
-      <option value="IL">Illinois</option>
-      <option value="IN">Indiana</option>
-      <option value="KS">Kansas</option>
-      <option value="KY">Kentucky</option>
-      <option value="LA">Louisiana</option>
-      <option value="MA">Massachusetts</option>
-      <option value="MD">Maryland</option>
-      <option value="ME">Maine</option>
-      <option value="MI">Michigan</option>
-      <option value="MN">Minnesota</option>
-      <option value="MO">Missouri</option>
-      <option value="MS">Mississippi</option>
-      <option value="MT">Montana</option>
-      <option value="NC">North Carolina</option>
-      <option value="ND">North Dakota</option>
-      <option value="NE">Nebraska</option>
-      <option value="NH">New Hampshire</option>
-      <option value="NJ">New Jersey</option>
-      <option value="NM">New Mexico</option>
-      <option value="NV">Nevada</option>
-      <option value="NY">New York</option>
-      <option value="OH">Ohio</option>
-      <option value="OK">Oklahoma</option>
-      <option value="OR">Oregon</option>
-      <option value="PA">Pennsylvania</option>
-      <option value="PR">Puerto Rico</option>
-      <option value="RI">Rhode Island</option>
-      <option value="SC">South Carolina</option>
-      <option value="SD">South Dakota</option>
-      <option value="TN">Tennessee</option>
-      <option value="TX">Texas</option>
-      <option value="UT">Utah</option>
-      <option value="VA">Virginia</option>
-      <option value="VT">Vermont</option>
-      <option value="WA">Washington</option>
-      <option value="WI">Wisconsin</option>
-      <option value="WV">West Virginia</option>
-      <option value="WY">Wyoming</option>
-    </select>
+            <select className="form-control" id="schoolState6" name="schoolState6" ref="schoolState6">
+              <option value="--">--</option>
+              <option value="AK">Alaska</option>
+              <option value="AL">Alabama</option>
+              <option value="AR">Arkansas</option>
+              <option value="AZ">Arizona</option>
+              <option value="CA">California</option>
+              <option value="CO">Colorado</option>
+              <option value="CT">Connecticut</option>
+              <option value="DC">District of Columbia</option>
+              <option value="DE">Delaware</option>
+              <option value="FL">Florida</option>
+              <option value="GA">Georgia</option>
+              <option value="HI">Hawaii</option>
+              <option value="IA">Iowa</option>
+              <option value="ID">Idaho</option>
+              <option value="IL">Illinois</option>
+              <option value="IN">Indiana</option>
+              <option value="KS">Kansas</option>
+              <option value="KY">Kentucky</option>
+              <option value="LA">Louisiana</option>
+              <option value="MA">Massachusetts</option>
+              <option value="MD">Maryland</option>
+              <option value="ME">Maine</option>
+              <option value="MI">Michigan</option>
+              <option value="MN">Minnesota</option>
+              <option value="MO">Missouri</option>
+              <option value="MS">Mississippi</option>
+              <option value="MT">Montana</option>
+              <option value="NC">North Carolina</option>
+              <option value="ND">North Dakota</option>
+              <option value="NE">Nebraska</option>
+              <option value="NH">New Hampshire</option>
+              <option value="NJ">New Jersey</option>
+              <option value="NM">New Mexico</option>
+              <option value="NV">Nevada</option>
+              <option value="NY">New York</option>
+              <option value="OH">Ohio</option>
+              <option value="OK">Oklahoma</option>
+              <option value="OR">Oregon</option>
+              <option value="PA">Pennsylvania</option>
+              <option value="PR">Puerto Rico</option>
+              <option value="RI">Rhode Island</option>
+              <option value="SC">South Carolina</option>
+              <option value="SD">South Dakota</option>
+              <option value="TN">Tennessee</option>
+              <option value="TX">Texas</option>
+              <option value="UT">Utah</option>
+              <option value="VA">Virginia</option>
+              <option value="VT">Vermont</option>
+              <option value="WA">Washington</option>
+              <option value="WI">Wisconsin</option>
+              <option value="WV">West Virginia</option>
+              <option value="WY">Wyoming</option>
+            </select>
 
-  </div>
+          </div>
 
 
-</div>
+        </div>
 
-<div className="col-md-2">
+        <div className="col-md-2">
 
-  <div className="form-group">
+          <div className="form-group">
 
-    <label for="graduationDate6" id="graduationDateLabel6">Graduation Date:</label>
+            <label for="graduationDate6" id="graduationDateLabel6">Graduation Date:</label>
 
-    <input type="text" className="form-control" id="graduationDate6" ref="graduationDate6" placeholder="mm/dd/yyyy"></input>
+            <input type="text" className="form-control" id="graduationDate6" ref="graduationDate6" placeholder="mm/dd/yyyy"></input>
 
-  </div>
+          </div>
 
 
-</div>
+        </div>
 
-<div className="col-md-3">
+        <div className="col-md-3">
 
-  <div className="form-group">
+          <div className="form-group">
 
-    <label for="degree6" id="degreeLabel6">Degree/Certificate:</label>
+            <label for="degree6" id="degreeLabel6">Degree/Certificate:</label>
 
-    <input type="text" className="form-control" id="degree6" ref="degree6"></input>
+            <input type="text" className="form-control" id="degree6" ref="degree6"></input>
 
-  </div>
+          </div>
 
 
-</div>
+        </div>
 
 
+      </div>
+
+    </div>
   </div>
 
 
