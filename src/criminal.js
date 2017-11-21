@@ -63,13 +63,56 @@ processForm() {
   localStorage.setItem("offenseLevel6", offenseLevel6);
   localStorage.setItem("offense6", offense6);
 
-  if(document.getElementById("offenseDate").value == ""){
 
-    document.getElementById("offsenseDateLabel").innerHTML = "Offense Date:"
 
-    document.getElementById("offsenseDateLabel").style.color = "black";
+if(document.getElementById("commited").value === "Yes"){
 
-  }
+if(document.getElementById("offenseDate").value==="" || !dateTest.test(document.getElementById("offenseDate").value)){
+  var errorDetected = 1;
+
+  document.getElementById("offsenseDateLabel").innerHTML = "Offense Date: *Required Information"
+  document.getElementById("offsenseDateLabel").style.color = "red";
+}else{
+  document.getElementById("offsenseDateLabel").innerHTML = "Offense Date:"
+  document.getElementById("offsenseDateLabel").style.color = "black";
+
+}
+
+if(document.getElementById("offenseLevel").value==="--"){
+  var errorDetected = 1;
+
+  document.getElementById("offenseLevelLabel").innerHTML = "Misdemeanor/Felony *Required Information"
+  document.getElementById("offenseLevelLabel").style.color = "red";
+}else{
+  document.getElementById("offenseLevelLabel").innerHTML = "Misdemeanor/Felony"
+  document.getElementById("offenseLevelLabel").style.color = "black";
+
+}
+
+if(document.getElementById("offense").value==="" || document.getElementById("offense").value===" "){
+  var errorDetected = 1;
+
+  document.getElementById("offsenseLabel").innerHTML = "Offense: *Required Information"
+  document.getElementById("offsenseLabel").style.color = "red";
+}else{
+  document.getElementById("offsenseLabel").innerHTML = "Offense:"
+  document.getElementById("offsenseLabel").style.color = "black";
+
+}
+
+
+}else{
+
+  document.getElementById("offsenseLabel").innerHTML = "Offense:"
+  document.getElementById("offsenseLabel").style.color = "black";
+  document.getElementById("offenseLevelLabel").innerHTML = "Misdemeanor/Felony"
+  document.getElementById("offenseLevelLabel").style.color = "black";
+  document.getElementById("offsenseDateLabel").innerHTML = "Offense Date:"
+  document.getElementById("offsenseDateLabel").style.color = "black";
+
+}
+
+
 
   if(document.getElementById("offenseDate2").value == ""){
 

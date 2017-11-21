@@ -6,6 +6,7 @@ class JobRelated extends Component {
 
 processForm() {
   localStorage.setItem("complete2", '0');
+  localStorage.setItem("complete22", '0');
   document.body.scrollTop = document.documentElement.scrollTop = 0;
   var errorDetected = 0;
   var zipTest = /(^\d{5}$)|(^\d{5}-\d{4}$)/;
@@ -360,6 +361,7 @@ processForm() {
 
 processForm2() {
   localStorage.setItem("complete2", '0');
+  localStorage.setItem("complete22", '0');
   document.body.scrollTop = document.documentElement.scrollTop = 0;
   var errorDetected = 0;
   var continueLink = document.getElementById("continue");
@@ -613,7 +615,7 @@ processForm2() {
 
   if (document.getElementById("dateAvailable").value == "" || !dateTest.test(document.getElementById("dateAvailable").value)) {
 
-    var complete = '1';
+
     localStorage.setItem("complete2", complete);
 
     errorDetected = 1;
@@ -639,6 +641,9 @@ processForm2() {
 
 
   if (errorDetected == 0){
+
+    var complete = '1';
+    localStorage.setItem("complete22", complete);
 
     document.getElementById("infoMessage").innerHTML = "Your information has been saved. Press continue to move on to the next phase of the application " + "<i class='fa fa-check-circle-o' aria-hidden='true'></i>"
 
@@ -674,6 +679,20 @@ componentDidMount () {
   var vehicle = document.getElementById("vehicle");
   var insurance = document.getElementById("insurance");
   var willing = document.getElementById("willing");
+
+  if(localStorage.getItem("position") == "Driver"){
+
+    localStorage.setItem("complete22", '0');
+
+  }else{
+    localStorage.setItem("complete2", '0');
+
+  }
+
+
+  if(localStorage.getItem("complete22") == '1') {
+  document.getElementById("continue").style.visibility = 'visible';
+    }
 
   if(localStorage.getItem("complete2") == '1') {
   document.getElementById("continue").style.visibility = 'visible';

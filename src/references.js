@@ -231,7 +231,7 @@ processForm() {
 
   }
 
-  if (document.getElementById("referenceCompany2").value == "" || document.getElementById("referenceCompany").value == " ") {
+  if (document.getElementById("referenceCompany2").value == "" || document.getElementById("referenceCompany2").value == " ") {
 
     errorDetected = 1;
 
@@ -248,7 +248,7 @@ processForm() {
 
   }
 
-  if (document.getElementById("referenceAddress2").value == "" || document.getElementById("referenceAddress").value == " ") {
+  if (document.getElementById("referenceAddress2").value == "" || document.getElementById("referenceAddress2").value == " ") {
 
     errorDetected = 1;
 
@@ -268,7 +268,7 @@ processForm() {
 
 
 
-  if (document.getElementById("referenceEmail2").value == "" || !emailTest.test(document.getElementById("referenceEmail").value)) {
+  if (document.getElementById("referenceEmail2").value == "" || !emailTest.test(document.getElementById("referenceEmail2").value)) {
 
     errorDetected = 1;
 
@@ -288,7 +288,7 @@ processForm() {
   }
 
 
-  if (document.getElementById("referencePhone2").value == "" || !phoneTest.test(document.getElementById("referencePhone").value)) {
+  if (document.getElementById("referencePhone2").value == "" || !phoneTest.test(document.getElementById("referencePhone2").value)) {
 
     errorDetected = 1;
 
@@ -350,7 +350,7 @@ processForm() {
 
   }
 
-  if (document.getElementById("referenceCompany3").value == "" || document.getElementById("referenceCompany").value == " ") {
+  if (document.getElementById("referenceCompany3").value == "" || document.getElementById("referenceCompany3").value == " ") {
 
     errorDetected = 1;
 
@@ -367,7 +367,7 @@ processForm() {
 
   }
 
-  if (document.getElementById("referenceAddress3").value == "" || document.getElementById("referenceAddress").value == " ") {
+  if (document.getElementById("referenceAddress3").value == "" || document.getElementById("referenceAddress3").value == " ") {
 
     errorDetected = 1;
 
@@ -387,7 +387,7 @@ processForm() {
 
 
 
-  if (document.getElementById("referenceEmail3").value == "" || !emailTest.test(document.getElementById("referenceEmail").value)) {
+  if (document.getElementById("referenceEmail3").value == "" || !emailTest.test(document.getElementById("referenceEmail3").value)) {
 
     errorDetected = 1;
 
@@ -407,7 +407,7 @@ processForm() {
   }
 
 
-  if (document.getElementById("referencePhone3").value == "" || !phoneTest.test(document.getElementById("referencePhone").value)) {
+  if (document.getElementById("referencePhone3").value == "" || !phoneTest.test(document.getElementById("referencePhone3").value)) {
 
     errorDetected = 1;
 
@@ -470,7 +470,7 @@ processForm() {
 
   }
 
-  if (document.getElementById("referenceCompany4").value == "" || document.getElementById("referenceCompany").value == " ") {
+  if (document.getElementById("referenceCompany4").value == "" || document.getElementById("referenceCompany4").value == " ") {
 
     errorDetected = 1;
 
@@ -487,7 +487,7 @@ processForm() {
 
   }
 
-  if (document.getElementById("referenceAddress4").value == "" || document.getElementById("referenceAddress").value == " ") {
+  if (document.getElementById("referenceAddress4").value == "" || document.getElementById("referenceAddress4").value == " ") {
 
     errorDetected = 1;
 
@@ -507,7 +507,7 @@ processForm() {
 
 
 
-  if (document.getElementById("referenceEmail4").value == "" || !emailTest.test(document.getElementById("referenceEmail").value)) {
+  if (document.getElementById("referenceEmail4").value == "" || !emailTest.test(document.getElementById("referenceEmail4").value)) {
 
     errorDetected = 1;
 
@@ -527,7 +527,7 @@ processForm() {
   }
 
 
-  if (document.getElementById("referencePhone4").value == "" || !phoneTest.test(document.getElementById("referencePhone").value)) {
+  if (document.getElementById("referencePhone4").value == "" || !phoneTest.test(document.getElementById("referencePhone4").value)) {
 
     errorDetected = 1;
 
