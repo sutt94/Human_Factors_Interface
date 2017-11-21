@@ -53,6 +53,18 @@ class Home extends Component {
     localStorage.setItem("military", military);
 
 
+    if(position === "Driver"){
+
+      localStorage.setItem("complete22", '0');
+
+    }
+    if(position === "Developer" || position =="Analyst" ){
+
+      localStorage.setItem("complete2", '0');
+
+    }
+
+
     if (document.getElementById("firstName").value == "" || document.getElementById("firstName").value == " ") {
 
       errorDetected = 1;
@@ -253,6 +265,7 @@ class Home extends Component {
         continueLink.style.visibility = 'visible';
 
 
+
     }
 
     else if (errorDetected == 1){
@@ -264,6 +277,8 @@ class Home extends Component {
         continueLink.style.visibility = 'hidden';
 
     }
+
+
 
 
 

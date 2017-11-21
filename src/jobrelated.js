@@ -6,7 +6,6 @@ class JobRelated extends Component {
 
 processForm() {
   localStorage.setItem("complete2", '0');
-  localStorage.setItem("complete22", '0');
   document.body.scrollTop = document.documentElement.scrollTop = 0;
   var errorDetected = 0;
   var zipTest = /(^\d{5}$)|(^\d{5}-\d{4}$)/;
@@ -334,6 +333,7 @@ processForm() {
     var complete = '1';
     localStorage.setItem("complete2", complete);
 
+
     document.getElementById("infoMessage").innerHTML = "Your information has been saved. Press continue to move on to the next phase of the application " + "<i class='fa fa-check-circle-o' aria-hidden='true'></i>"
 
       document.getElementById("infoMessage").style.color = "green";
@@ -344,6 +344,8 @@ processForm() {
   }
 
   else if (errorDetected == 1){
+
+    localStorage.setItem("complete2", '0');
 
     document.getElementById("infoMessage").innerHTML = "There was a problem with some of the data you entered. Please make the required corrections below before continuing " + "<i class='fa fa-exclamation-circle' aria-hidden='true'>"
 
@@ -360,7 +362,6 @@ processForm() {
 }
 
 processForm2() {
-  localStorage.setItem("complete2", '0');
   localStorage.setItem("complete22", '0');
   document.body.scrollTop = document.documentElement.scrollTop = 0;
   var errorDetected = 0;
@@ -645,6 +646,7 @@ processForm2() {
     var complete = '1';
     localStorage.setItem("complete22", complete);
 
+
     document.getElementById("infoMessage").innerHTML = "Your information has been saved. Press continue to move on to the next phase of the application " + "<i class='fa fa-check-circle-o' aria-hidden='true'></i>"
 
       document.getElementById("infoMessage").style.color = "green";
@@ -655,6 +657,8 @@ processForm2() {
   }
 
   else if (errorDetected == 1){
+
+    localStorage.setItem("complete22", '0');
 
     document.getElementById("infoMessage").innerHTML = "There was a problem with some of the data you entered. Please make the required corrections below before continuing " + "<i class='fa fa-exclamation-circle' aria-hidden='true'>"
 
@@ -680,11 +684,13 @@ componentDidMount () {
   var insurance = document.getElementById("insurance");
   var willing = document.getElementById("willing");
 
-  if(localStorage.getItem("position") == "Driver"){
+  if(localStorage.getItem("position").value == "Driver"){
 
     localStorage.setItem("complete22", '0');
 
-  }else{
+  }
+  if(localStorage.getItem("position").value == "Developer" || localStorage.getItem("position").value =="Analyst" ){
+
     localStorage.setItem("complete2", '0');
 
   }
@@ -697,6 +703,8 @@ componentDidMount () {
   if(localStorage.getItem("complete2") == '1') {
   document.getElementById("continue").style.visibility = 'visible';
     }
+
+
   if(localStorage.getItem("emergencyfirstName") !== null) {
     this.refs.emergencyfirstName.value = localStorage.getItem("emergencyfirstName");
     }
